@@ -58,6 +58,8 @@ class Functions {
 		foreach ($aCss as $sCss) {
 			echo PHP_EOL . "<link rel='stylesheet' href='../public/assets/$sCss?$sTimeStamp'>";
 		}
+
+		echo PHP_EOL . "<link href=\"https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap\" rel=\"stylesheet\">";
 	}
 
 	/**
@@ -114,6 +116,6 @@ class Functions {
 		$oData = new \DateTimeImmutable("now");
 		$sTimeStamp = $oData->getTimestamp();
 
-		echo "<a href=\"$sLink\"><img src='../public/assets/img/$sNomeImagem.$sFormato?$sTimeStamp'  alt='$sAlt'></a>";
+		echo "<a href=\"$sLink\"><img src='../public/assets/img/$sNomeImagem.$sFormato?$sTimeStamp' alt='$sAlt'></a>";
 	}
 }

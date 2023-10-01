@@ -18,8 +18,8 @@ use DevFashion\Core\Functions;
 	
 	<title>DevFashion</title>
 	<?php
-	Functions::addFavicon();
-	Functions::addStyleSheet(["css/style.css"]);
+		Functions::addFavicon();
+		Functions::addStyleSheet(["css/style.css"]);
 	?>
 </head>
 <body>

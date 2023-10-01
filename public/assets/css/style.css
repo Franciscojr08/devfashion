@@ -59,6 +59,6 @@
     font-size: 12px;
 }
 
-.nav-project-icons:hover {
+#nav-project-icon-atual, .nav-project-icons:hover {
     color: #009288;
 }

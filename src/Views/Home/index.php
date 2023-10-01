@@ -17,7 +17,6 @@ use DevFashion\Core\Functions;
 		Functions::addFavicon();
 		Functions::addStyleSheet(["css/style.css"]);
 	?>
-	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
 </head>
 <body>
 <?php Functions::renderMenu($aDados); ?>
