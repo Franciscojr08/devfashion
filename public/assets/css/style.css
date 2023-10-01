@@ -1,0 +1,64 @@
+.nav-project {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 0!important;
+}
+
+.nav-project-img {
+    text-align: center;
+    width: 80%;
+    border-bottom: 1px solid #EDEDED;
+}
+
+.nav-project-img img {
+    width: 218px;
+    max-width: 20%;
+}
+
+.nav-project-list {
+    margin: 10px 0 10px 0;
+}
+
+.nav-project-list ul {
+    display: flex;
+}
+.nav-project-list  ul li {
+    list-style: none;
+}
+
+.nav-project-list ul li a {
+    text-decoration: none;
+    color: #333333!important;
+    font-size: 14px!important;
+    font-weight: 800!important;
+    padding: 13px 30px!important;
+    letter-spacing: 1px!important;
+    font-family: 'Raleway', sans-serif !important;
+}
+
+#nav-project-list-selected, .nav-project-list ul li a:hover {
+    color: #009288!important;
+    background-color: #F3F3F3;
+}
+
+.nav-project-icons {
+    text-decoration: none;
+    color: #333333;
+}
+
+#contador_itens_carrinho {
+    background-color: #009288;
+    padding: 3px 4px;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 800;
+    text-align: center;
+    font-size: 12px;
+}
+
+.nav-project-icons:hover {
+    color: #009288;
+}

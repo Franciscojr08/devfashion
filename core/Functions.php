@@ -12,12 +12,14 @@ class Functions {
 	/**
 	 * Renderiza o menu
 	 *
+	 * @param array $aDados
 	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
-	public static function renderMenu(): void {
+	public static function renderMenu(array $aDados): void {
+		$sPaginaAtual = $aDados['acao'];
 		require_once "Sistema/nav.php";
 	}
 
