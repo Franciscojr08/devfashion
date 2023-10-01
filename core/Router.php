@@ -41,13 +41,13 @@ class Router {
 		try {
 			$sAcao = $this->aDados['acao'];
 			if (!method_exists($oController,$sAcao)) {
-				$oErroController->paginaNaoEncontrada();
+				$oErroController->paginaNaoEncontrada($this->aDados);
 				exit();
 			}
 
 			$oController->$sAcao($this->aDados);
 		} catch (\Exception $oExp) {
-			$oErroController->errorExeption($oExp->getMessage());
+			$oErroController->errorExeption($this->aDados, $oExp->getMessage(), $oExp->getCode());
 			exit();
 		}
 	}
@@ -82,8 +82,7 @@ class Router {
 
 		if (!class_exists($oControllerClass)) {
 			$oErroController = new errorController();
-			$oErroController->paginaNaoEncontrada();
-
+			$oErroController->paginaNaoEncontrada($this->aDados);
 			exit();
 		}
 
