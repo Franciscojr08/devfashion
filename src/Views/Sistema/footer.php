@@ -43,7 +43,7 @@
                     <!--Grid column-->
                     <div class="col-auto">
                         <p class="pt-2">
-                            <strong>Inscreva-se na nossa newsletter</strong>
+                            <strong>Inscreva-se em nossa newsletter</strong>
                         </p>
                     </div>
                     <!--Grid column-->
@@ -51,9 +51,9 @@
                     <!--Grid column-->
                     <div class="col-md-5 col-12">
                         <!-- Email input -->
-                        <div class="form-outline form-white mb-4">
-                            <input type="email" id="form5Example21" class="form-control" />
-                            <label class="form-label" for="form5Example21">Endereço de email</label>
+                        <div class="form-outline form-white mb-3">
+                            <input type="email" id="form5Example21" class="form-control" placeholder="Insira seu e-mail"/>
+<!--                            <label class="form-label" for="form5Example21">Endereço de email</label>-->
                         </div>
                     </div>
                     <!--Grid column-->
@@ -75,8 +75,8 @@
         <!-- Section: Text -->
         <section class="mb-4">
             <p>
-                Site desenvolvido pelo Grupo 1 da matéria de Desenvolvimento Web: HTML, CSS, Javascript e PHP.
-                Integrantes do Grupo
+                Site desenvolvido pelo Grupo 1 da matéria de Desenvolvimento Web: HTML, CSS, Javascript e PHP; Ministrada pelo Professor André Teixeira. <br>
+                Integrantes do Grupo: Davi Klayver | Fracisco Santos | Gabriel Vieira | Johon Lennon | Juliana Rezende
             </p>
         </section>
         <!-- Section: Text -->
