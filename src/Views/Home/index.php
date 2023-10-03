@@ -21,8 +21,21 @@ use DevFashion\Core\Functions;
 <body>
 <?php Functions::renderMenu($aDados); ?>
 
+<section class="destaques">
+    <h2>Produtos em Destaque</h2>
+    <h3 class="produtos-container">Moda Masculina</h3>
+
+    <?php foreach ($loRoupasMasculinas as $oRoupa) { ?>
+        <div class="produto">
+            <p><?php echo $oRoupa->getNome(); ?></p>
+            <?php Functions::addImage($oRoupa->getCaminhoImagem(),"jpg","#"); ?>
+            <p>Preço: <?php echo $oRoupa->getDescricaoPreco(); ?> </p>
+            <button>Detalhes</button>
+            <button>Adicionar ao Carrinho</button>
+        </div>
+    <?php } ?>
+</section>
 
 <?php Functions::renderFooter(); ?>
 <?php Functions::addScript(); ?>
 </body>
-</html>
