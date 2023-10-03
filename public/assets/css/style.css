@@ -62,3 +62,59 @@
 #nav-project-icon-atual, .nav-project-icons:hover {
     color: #009288;
 }
+
+section.destaques {
+    padding: 20px;
+    text-align: center;
+    overflow: auto;
+}
+
+
+section.destaques h2 {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+section.destaques h3{
+    font-size: 25px;
+}
+
+.produtos-container {
+    text-align: center;
+}
+
+.produto {
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.produto img {
+    max-width: 100%;
+    height: auto;
+}
+
+.destaques button {
+    background-color: transparent;
+    border: 2px solid #333;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.destaques button:hover{
+    background-color: #333;
+    color: #fff;
+}
+
