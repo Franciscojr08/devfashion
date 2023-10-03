@@ -21,6 +21,7 @@ use DevFashion\Core\Functions;
 <body>
 <?php Functions::renderMenu($aDados); ?>
 
+<?php require 'include/carrousel.php'?>
 
 <?php Functions::renderFooter(); ?>
 <?php Functions::addScript(); ?>
