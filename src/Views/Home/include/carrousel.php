@@ -9,7 +9,7 @@
 	</div>
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-			<img src="https://images.tcdn.com.br/files/767703/themes/57/img/settings/SPRING.png?257f4779d59c9195913ebc826e6cdbfe"
+			<img src="/public/assets/img/carrossel/banner1.png"
 				 class="d-block w-100" alt="...">
 		</div>
 		<div class="carousel-item">
