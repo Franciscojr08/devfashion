@@ -2,6 +2,8 @@
 
 namespace DevFashion\Core;
 
+use DevFashion\Src\Roupa\Roupa;
+
 /**
  * Class Functions
  * @package DevFashion\Core
@@ -117,5 +119,30 @@ class Functions {
 		$sTimeStamp = $oData->getTimestamp();
 
 		echo "<a href=\"$sLink\"><img src='../public/assets/img/$sNomeImagem.$sFormato?$sTimeStamp' alt='$sAlt'></a>";
+	}
+
+	/**
+	 * Imprime o card da foto na tela
+	 *
+	 * @param Roupa $oRoupa
+	 * @author Francisco Santos franciscosantos@moobitech.com.br
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public static function imprimirCardRoupa(Roupa $oRoupa): void {
+		$oData = new \DateTimeImmutable("now");
+		$sTimeStamp = $oData->getTimestamp();
+		$sNome = mb_convert_encoding($oRoupa->getNome(),'UTF-8');
+
+		echo "
+			<div class=\"produto\">
+				<p>{$sNome}</p>
+				<img src='../public/assets/img/{$oRoupa->getCaminhoImagem()}.jpg?$sTimeStamp'
+				<p>Preço: {$oRoupa->getDescricaoPreco()}</p>
+				<button>Detalhes</button>
+				<button>Adicionar ao Carrinho</button>
+			</div>
+		";
 	}
 }

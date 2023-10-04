@@ -1,8 +1,15 @@
 <?php
 
 use DevFashion\Core\Functions;
+use DevFashion\Src\Roupa\RoupaList;
 
-/** @var array $aDados */
+/**
+ * @var array $aDados
+ * @var RoupaList $loRoupasMasculinas
+ * @var RoupaList $loRoupasFemininas
+ * @var RoupaList $loRoupasInfantis
+ * @var RoupaList $loRoupasPlusSize
+ */
 ?>
 
 <!doctype html>
@@ -21,19 +28,47 @@ use DevFashion\Core\Functions;
 <body>
 <?php Functions::renderMenu($aDados); ?>
 
-<section class="destaques">
-    <h2>Produtos em Destaque</h2>
-    <h3 class="produtos-container">Moda Masculina</h3>
+<?php require 'include/carrousel.php'?>
 
-    <?php foreach ($loRoupasMasculinas as $oRoupa) { ?>
-        <div class="produto">
-            <p><?php echo $oRoupa->getNome(); ?></p>
-            <?php Functions::addImage($oRoupa->getCaminhoImagem(),"jpg","#"); ?>
-            <p>Preço: <?php echo $oRoupa->getDescricaoPreco(); ?> </p>
-            <button>Detalhes</button>
-            <button>Adicionar ao Carrinho</button>
-        </div>
-    <?php } ?>
+<section class="destaques">
+	<h2>Produtos em Destaque</h2>
+	<h3 class="produtos-container">Moda Masculina</h3>
+
+	<?php
+		foreach ($loRoupasMasculinas as $oRoupa) {
+			Functions::imprimirCardRoupa($oRoupa);
+		}
+	?>
+</section>
+
+<section class="destaques">
+	<h3 class="produtos-container">Moda Feminina</h3>
+
+	<?php
+		foreach ($loRoupasFemininas as $oRoupa) {
+			Functions::imprimirCardRoupa($oRoupa);
+		}
+	?>
+</section>
+
+<section class="destaques">
+	<h3 class="produtos-container">Moda Infantil</h3>
+
+	<?php
+		foreach ($loRoupasInfantis as $oRoupa) {
+			Functions::imprimirCardRoupa($oRoupa);
+		}
+	?>
+</section>
+
+<section class="destaques">
+	<h3 class="produtos-container">Moda Plus Size</h3>
+
+	<?php
+		foreach ($loRoupasPlusSize as $oRoupa) {
+			Functions::imprimirCardRoupa($oRoupa);
+		}
+	?>
 </section>
 
 <?php Functions::renderFooter(); ?>
