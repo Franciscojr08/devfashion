@@ -17,7 +17,7 @@
 				 class="d-block w-100" alt="...">
 		</div>
 		<div class="carousel-item">
-			<img src="https://www.agnelaroupas.com.br/wp-content/uploads/2022/12/BANNER_SITE_AGNELA-ROUPAS_001.jpg"
+			<img src="/public/assets/img/carrossel/banner3.png"
 				 class="d-block w-100" alt="...">
 		</div>
 	</div>
