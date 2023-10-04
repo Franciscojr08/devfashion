@@ -125,7 +125,7 @@ class Functions {
 	 * Imprime o card da foto na tela
 	 *
 	 * @param Roupa $oRoupa
-	 * @author Francisco Santos franciscosantos@moobitech.com.br
+	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
