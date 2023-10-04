@@ -13,7 +13,7 @@
 				 class="d-block w-100" alt="...">
 		</div>
 		<div class="carousel-item">
-			<img src="https://cdn.dooca.store/77706/files/banner-desk-2023-14.png?v=1690982489&webp=0"
+			<img src="/public/assets/img/carrossel/banner2.png"
 				 class="d-block w-100" alt="...">
 		</div>
 		<div class="carousel-item">
