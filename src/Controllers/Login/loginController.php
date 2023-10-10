@@ -14,7 +14,9 @@ class loginController {
 	}
 
 	public function cadastrar(): void {
-		// TODO: Implementar.
+		require_once "src/Views/Acesso/cadastro.php";
+        // TODO: Implementar.
+
 	}
 
 	public function logar(): void {
