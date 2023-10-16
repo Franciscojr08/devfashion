@@ -36,4 +36,7 @@ class clienteController {
 	public function excluirCliente(): void {
 		// TODO: Implementar.
 	}
+	public function cadastrarCliente(array $aDados): void {
+		$t =1;
+	}
 }
