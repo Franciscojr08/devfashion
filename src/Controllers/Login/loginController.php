@@ -20,6 +20,7 @@ class loginController {
 	}
 
 	public function logar(): void {
+        require_once "src/Views/Acesso/login.php";
 		// TODO: Implementar.
 		// Gerar Hash senha: password_hash($sSenha,PASSWORD_BCRYPT, ['cost' => 11])
 		// Verificar Hash senha: password_verify($sSenha, $sHash)
