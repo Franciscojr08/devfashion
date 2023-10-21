@@ -72,5 +72,5 @@ use DevFashion\Src\Roupa\RoupaList;
 </section>
 
 <?php Functions::renderFooter(); ?>
-<?php Functions::addScript(); ?>
+<?php Functions::addScript(["js/sistema/sistema.js"]); ?>
 </body>
