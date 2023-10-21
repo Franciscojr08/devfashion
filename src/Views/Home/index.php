@@ -22,7 +22,7 @@ use DevFashion\Src\Roupa\RoupaList;
 	<title>DevFashion</title>
 	<?php
 		Functions::addFavicon();
-		Functions::addStyleSheet(["css/style.css"]);
+		Functions::addStyleSheet();
 	?>
 </head>
 <body>

@@ -4,17 +4,19 @@ create table cle_cliente
     cle_nome            VARCHAR(100) NOT NULL,
     cle_cpf             VARCHAR(11)  NOT NULL,
     cle_data_nascimento DATE         NOT NULL,
+    cle_sexo            tinyint(1)   NOT NULL,
     cle_email           VARCHAR(50)  NOT NULL,
     cle_telefone        VARCHAR(11)  NOT NUll,
+    cle_senha           VARCHAR(100) NOT NULL,
     cle_cep             VARCHAR(11)  NOT NULL,
     cle_logradouro      VARCHAR(100) NOT NULL,
     cle_bairro          VARCHAR(50)  NOT NULL,
     cle_estado          VARCHAR(50)  NOT NULL,
     cle_cidade          VARCHAR(50)  NOT NULL,
     cle_complemento     VARCHAR(100) NOT NULL,
-    cle_data_cadastro   DATE         NOT NULL,
-    cle_senha           VARCHAR(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+    cle_numero          varchar(50)  not null,
+    cle_data_cadastro   DATE         NOT NULL
+) ENGINE = MyISAM  DEFAULT CHARSET = UTF8MB4;
 
 create table rpa_roupa
 (
