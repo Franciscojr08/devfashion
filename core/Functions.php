@@ -52,7 +52,8 @@ class Functions {
 		
 		$aCssPadrao = [
 			"css/lib/bootstrap/bootstrap.min.css",
-			"css/lib/fontawesome/all.min.css"
+			"css/lib/fontawesome/all.min.css",
+			"css/style.css"
 		];
 
 		$aCss = array_merge($aCssPadrao,$aCss);

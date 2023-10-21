@@ -4,17 +4,11 @@ namespace DevFashion\Src\Sistema\Enum;
 
 use Exception;
 
-/**
- * Class TipoRoupaEnum
- * @package DevFashion\Src\Sistema\Enum
- * @version 1.0.0
- */
-enum TipoRoupaEnum implements EnumInterface {
+enum SexoEnum implements EnumInterface {
 
 	const MASCULINO = 1;
 	const FEMININO = 2;
-	const INFANTIL = 3;
-	const PLUS_SIZE = 4;
+	const OUTRO = 3;
 
 	/**
 	 * Retorna os valores dos tipos de roupa
@@ -38,13 +32,8 @@ enum TipoRoupaEnum implements EnumInterface {
 		];
 
 		$aValores[] = [
-			'valor' => self::INFANTIL,
-			'descricao' => "Infantil"
-		];
-
-		$aValores[] = [
-			'valor' => self::PLUS_SIZE,
-			'descricao' => "Plus Size"
+			'valor' => self::OUTRO,
+			'descricao' => "Outro"
 		];
 
 		return $aValores;
@@ -64,8 +53,7 @@ enum TipoRoupaEnum implements EnumInterface {
 		return match ($iValorEnum) {
 			self::MASCULINO => "Masculino",
 			self::FEMININO => "Feminino",
-			self::INFANTIL => "Infantil",
-			self::PLUS_SIZE => "Plus Size",
+			self::OUTRO => "Outro",
 			default => throw new Exception("Tipo de roupa não encontrada.")
 		};
 	}
