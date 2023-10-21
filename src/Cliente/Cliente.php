@@ -5,6 +5,8 @@ namespace DevFashion\Src\Cliente;
 use DevFashion\Src\Carrinho\Carrinho;
 use DevFashion\Src\ListaDesejos\ListaDesejos;
 use DevFashion\Src\Pedido\PedidoList;
+use DevFashion\Src\Roupa\RoupaList;
+use DevFashion\Src\Sistema\Sistema;
 
 /**
  * Class Cliente
@@ -27,6 +29,7 @@ class Cliente {
 	private string $sComplemento;
 	private \DateTimeImmutable $oDataCadastro;
 	private string $sSenha;
+	private ListaDesejos $oListaDesejos;
 
 	/**
 	 * Cria um objeto Cliente a partir de um array
@@ -425,8 +428,42 @@ class Cliente {
 		// TODO: Implementar.
 	}
 
+	/**
+	 * Retorna a lista de desejos do cliente
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return ListaDesejos
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
 	public function getListaDesejos(): ListaDesejos {
-		// TODO: Implementar.
+		if (empty($this->oListaDesejos)) {
+			if (Sistema::getListaDesejosDAO()->hasListaDesejos($this)) {
+				$this->oListaDesejos = Sistema::getListaDesejosDAO()->findByCliente($this);
+			} else {
+				$oListaDesejos = new ListaDesejos();
+				$oListaDesejos->cadastrar($this);
+				$this->oListaDesejos = $oListaDesejos;
+			}
+		}
+
+		return $this->oListaDesejos;
+	}
+
+	/**
+	 * Retorna as roupas da lista de desejos
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return RoupaList
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getRoupasNaListaDesejos(): RoupaList {
+		$oListaDesejos = $this->getListaDesejos();
+
+		return $oListaDesejos->getRoupas();
 	}
 
 	public function getPedidos(): PedidoList {

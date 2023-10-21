@@ -26,22 +26,22 @@ $sIdIconAtual = "id=\"nav-project-icon-atual\"";
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" <?php echo $sPaginaAtual == "masculino" ? $sIdPagAtual : "";?>>
+					<a class="nav-link" href="../shop/masculino" <?php echo $sPaginaAtual == "masculino" ? $sIdPagAtual : "";?>>
 						MASCULINO
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" <?php echo $sPaginaAtual == "feminino" ? $sIdPagAtual : "";?>>
+					<a class="nav-link" href="../shop/feminino" <?php echo $sPaginaAtual == "feminino" ? $sIdPagAtual : "";?>>
 						FEMININO
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" <?php echo $sPaginaAtual == "infantil" ? $sIdPagAtual : "";?>>
+					<a class="nav-link" href="../shop/infantil" <?php echo $sPaginaAtual == "infantil" ? $sIdPagAtual : "";?>>
 						INFANTIL
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" <?php echo $sPaginaAtual == "plus" ? $sIdPagAtual : "";?>>
+					<a class="nav-link" href="../shop/plus" <?php echo $sPaginaAtual == "plus" ? $sIdPagAtual : "";?>>
 						PLUS-SIZE
 					</a>
 				</li>
@@ -49,15 +49,15 @@ $sIdIconAtual = "id=\"nav-project-icon-atual\"";
 		</div>
 
 		<div class="d-flex">
-			<a href="#" title="Lista de desejos" <?php echo $sPaginaAtual == "lista" ? $sIdIconAtual : "";?> class="nav-project-icons">
+			<a href="../cliente/lista" title="Lista de desejos" <?php echo $sPaginaAtual == "lista" ? $sIdIconAtual : "";?> class="nav-project-icons">
 				<i class="fa-regular fa-heart fa-xl" style="margin-right: 5px"></i>
 			</a>
 
-			<a href="#" title="Meu Espaço" <?php echo $sPaginaAtual == "espaco" ? $sIdIconAtual : "";?> class="nav-project-icons">
+			<a href="../cliente/espaco" title="Meu Espaço" <?php echo $sPaginaAtual == "espaco" ? $sIdIconAtual : "";?> class="nav-project-icons">
 				<i class="fa-regular fa-user fa-xl" style="margin-right: 5px"></i>
 			</a>
 
-			<a href="#" title="Carrinho" <?php echo $sPaginaAtual == "carrinho" ? $sIdIconAtual : "";?> class="nav-project-icons">
+			<a href="../cliente/carrinho" title="Carrinho" <?php echo $sPaginaAtual == "carrinho" ? $sIdIconAtual : "";?> class="nav-project-icons">
 				<i class="fa-solid fa-cart-shopping fa-xl" style="margin-right: 5px"></i>
 			</a>
 			<span id="contador_itens_carrinho">0</span>

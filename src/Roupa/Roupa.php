@@ -2,6 +2,9 @@
 
 namespace DevFashion\Src\Roupa;
 
+use DevFashion\Core\Session;
+use DevFashion\Src\Sistema\Sistema;
+
 /**
  * Class Roupa
  * @package DevFashion\Src\Roupa
@@ -157,5 +160,60 @@ class Roupa {
 	 */
 	public function setCaminhoImagem(string $sCaminhoImagem): void {
 		$this->sCaminhoImagem = $sCaminhoImagem;
+	}
+
+	/**
+	 * Retorna se possui roupa a roupa na lista de desejo
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return bool
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function estaNaListaDesejos(): bool {
+		return Sistema::getListaDesejosDAO()->hasRoupaNaLista($this);
+	}
+
+	/**
+	 * Adiciona a roupa à lista de desejos
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function adicionarNaListaDesejos(): void {
+		if (!Session::hasClienteLogado()) {
+			throw new \Exception("É necessário está logado para realizar esta ação.");
+		}
+
+		$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+		$oListaDesejos = $oCliente->getListaDesejos();
+		$oListaDesejos->adicionarRoupa($this);
+	}
+
+	/**
+	 * Remove uma roupa da lista de desejos
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function removerRoupaDaListaDesejos(): void {
+		if (!Session::hasClienteLogado()) {
+			throw new \Exception("É necessário está logado para realizar esta ação.");
+		}
+
+		$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+		if (!Sistema::getListaDesejosDAO()->hasListaDesejos($oCliente)) {
+			throw new \Exception("O cliente não possui lista de desejos.");
+		}
+
+		$oListaDesejos = $oCliente->getListaDesejos();
+		$oListaDesejos->removerRoupa($this);
 	}
 }

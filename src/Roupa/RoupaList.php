@@ -28,4 +28,16 @@ class RoupaList extends \SplObjectStorage {
 
 		return $loRoupaList;
 	}
+
+	/**
+	 * Retorna se a lista está vazia
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return bool
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function isEmpty(): bool {
+		return $this->count() == 0;
+	}
 }

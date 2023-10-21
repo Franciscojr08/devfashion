@@ -60,8 +60,9 @@
     font-size: 12px;
 }
 
-#nav-project-icon-atual, .nav-project-icons:hover {
+#nav-project-icon-atual, .nav-project-icons:hover, .nav-project-icons svg:hover {
     color: #009288;
+    cursor: pointer;
 }
 
 section.destaques {
@@ -119,3 +120,30 @@ section.destaques h3{
     color: #fff;
 }
 
+.produto p {
+    margin-top: 1rem;
+}
+
+.lista-desejos {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.lista-desejos h4 {
+    color: #404040;
+    font-family: 'Roboto Light',sans-serif;
+    font-weight: bold;
+}
+
+.lista-desejos-vazia {
+    text-align: center;
+    min-height: 50vh;
+}
+
+.lista-desejos-vazia div {
+    padding-top: 15vh;
+}
+
+.lista-desejos-vazia div p {
+    font-size: 30px
+}
