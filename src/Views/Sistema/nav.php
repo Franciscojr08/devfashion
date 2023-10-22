@@ -1,11 +1,18 @@
 <?php
 
 use DevFashion\Core\Functions;
+use DevFashion\Core\Session;
 
 /** @var string $sPaginaAtual */
 
 $sIdPagAtual = "id=\"nav-project-list-selected\"";
 $sIdIconAtual = "id=\"nav-project-icon-atual\"";
+$bExibirBtnLogout = false;
+
+if (($sPaginaAtual == "lista" || $sPaginaAtual == "espaco" || $sPaginaAtual == "carrinho") && Session::hasClienteLogado()) {
+	$bExibirBtnLogout = true;
+}
+
 ?>
 
 <nav class="nav-project navbar navbar-expand-lg">
@@ -62,5 +69,13 @@ $sIdIconAtual = "id=\"nav-project-icon-atual\"";
 			</a>
 			<span id="contador_itens_carrinho">0</span>
 		</div>
+
+		<?php if ($bExibirBtnLogout) { ?>
+			<div>
+				<a href="../login/logout" title="Logout" class="nav-project-icons">
+					<i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ff0000;margin-left: 5px"></i>
+				</a>
+			</div>
+		<?php } ?>
 	</div>
 </nav>

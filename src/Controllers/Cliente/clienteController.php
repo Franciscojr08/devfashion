@@ -3,6 +3,7 @@
 namespace DevFashion\Src\Controllers\Cliente;
 
 use DevFashion\Core\Session;
+use DevFashion\Src\Cliente\Cliente;
 use DevFashion\Src\Controllers\Sistema\errorController;
 use DevFashion\Src\Sistema\Sistema;
 
@@ -25,7 +26,7 @@ class clienteController {
 	public function lista(array $aDados): void {
 		try {
 			if (!Session::hasClienteLogado()) {
-				throw new \Exception("É necessário está logado para acessar esta página.",401);
+				header("location: ../login");
 			}
 
 			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
@@ -39,9 +40,30 @@ class clienteController {
 		}
 	}
 
+	/**
+	 * Renderiza o espaço do cliente
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
 	public function espaco(array $aDados): void {
-		// TODO: Implementar.
-		require_once "Cliente/espaco.php";
+		try {
+			if (!Session::hasClienteLogado()) {
+				header("location: ../login");
+			}
+
+			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+			$loPedidos = $oCliente->getPedidos();
+
+			require_once "Cliente/espaco.php";
+		} catch (\Exception $oExp) {
+			$oErroController = new errorController();
+			$oErroController->errorExeption($aDados, $oExp->getMessage(), $oExp->getCode());
+			exit();
+		}
 	}
 
 	/**
@@ -57,7 +79,7 @@ class clienteController {
 	public function carrinho(array $aDados): void {
 		try {
 			if (!Session::hasClienteLogado()) {
-				throw new \Exception("É necessário está logado para acessar esta página.",401);
+				header("location: ../login");
 			}
 
 			// TODO: Implementar.
@@ -69,7 +91,7 @@ class clienteController {
 		}
 	}
 
-	public function compra(array $aDados): void {
+	public function comprar(array $aDados): void {
 		// TODO: Implementar.
 		require_once "Cliente/compra.php";
 	}
@@ -150,5 +172,27 @@ class clienteController {
 		}
 
 		echo json_encode($aRetorno);
+	}
+
+	/**
+	 * Cadastra um cliente
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function cadastrar(array $aDados): void {
+		try {
+			$oCliente = new Cliente();
+			$oCliente->cadastrar($aDados);
+			Session::setClienteId($oCliente->getId());
+
+			header("location: ../cliente/espaco");
+		} catch (\Exception $oExp) {
+			Session::setMensagem($oExp->getMessage());
+			header("location: ../login/cadastro");
+		}
 	}
 }

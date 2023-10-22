@@ -1,6 +1,7 @@
 <?php
 
 use DevFashion\Core\Functions;
+use DevFashion\Core\Session;
 
 /**
  * @var array $aDados
@@ -26,6 +27,16 @@ use DevFashion\Core\Functions;
 <main class="main_login_cadastro">
 	<form class="custom-form" action="../login/logar" id="login" type="post">
 		<h2 class="mb-4 text-center">Login</h2>
+
+		<?php if (Session::hasMensagem()) { ?>
+			<div class="alert alert-warning" role="alert">
+				<i class="fa-solid fa-triangle-exclamation"></i>
+				<?php
+					echo Session::getMensagem();
+					Session::removerMensagem();
+				?>
+			</div>
+		<?php } ?>
 
 		<div class="form-group col" style="padding-bottom: 10px;">
 			<label for="email" class="form-label mb-1"><b>Email</b></label>

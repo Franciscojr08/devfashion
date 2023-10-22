@@ -22,6 +22,7 @@ class Router {
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
 	public function __construct() {
+		Session::iniciar();
 		$this->attrValues();
 	}
 

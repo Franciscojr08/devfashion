@@ -6,6 +6,7 @@ use DevFashion\Src\Carrinho\Carrinho;
 use DevFashion\Src\ListaDesejos\ListaDesejos;
 use DevFashion\Src\Pedido\PedidoList;
 use DevFashion\Src\Roupa\RoupaList;
+use DevFashion\Src\Sistema\Enum\SexoEnum;
 use DevFashion\Src\Sistema\Sistema;
 
 /**
@@ -19,6 +20,7 @@ class Cliente {
 	private string $sNome;
 	private string $sCPF;
 	private \DateTimeImmutable $oDataNascimento;
+	private int $iSexo;
 	private string $sEmail;
 	private string $sTelefone;
 	private string $sCEP;
@@ -27,6 +29,7 @@ class Cliente {
 	private string $sEstado;
 	private string $sCidade;
 	private string $sComplemento;
+	private int $iNumero;
 	private \DateTimeImmutable $oDataCadastro;
 	private string $sSenha;
 	private ListaDesejos $oListaDesejos;
@@ -71,6 +74,18 @@ class Cliente {
 	 */
 	public function getId(): int {
 		return $this->iId;
+	}
+
+	/**
+	 * Retorna se o cliente possui o id preenchido
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return bool
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function hasId(): bool {
+		return !empty($this->iId);
 	}
 
 	/**
@@ -412,8 +427,99 @@ class Cliente {
 		$this->sSenha = $sSenha;
 	}
 
-	public function cadastrar(): void {
-		// TODO: Implementar.
+	/**
+	 * Retorna a descrição do sexo
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return string
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getDescricaoSexo(): string {
+		return SexoEnum::getDescricaoById($this->iSexo);
+	}
+
+	/**
+	 * Retorna o Id do sexo no enum de sexo
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return int
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getSexoIdEnum(): int {
+		return $this->iSexo;
+	}
+
+	/**
+	 * Atribui o Sexo
+	 *
+	 * @param int $iSexo
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function setSexo(int $iSexo): void {
+		$this->iSexo = $iSexo;
+	}
+
+	/**
+	 * Retorna o número do endereço
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return int
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getNumeroEndereco(): int {
+		return $this->iNumero;
+	}
+
+	/**
+	 * Atribui o número do endereço
+	 *
+	 * @param int $iNumero
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function setNumeroEndereco(int $iNumero): void {
+		$this->iNumero = $iNumero;
+	}
+
+	/**
+	 * Cadastra o cliente
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function cadastrar(array $aDados): void {
+		$this->checarCadastroDuplicado($aDados);
+
+		$this->sNome = $aDados['cle_nome'];
+		$this->sCPF = str_replace(".","",str_replace("-","",$aDados['cle_cpf']));
+		$this->oDataNascimento = new \DateTimeImmutable($aDados['cle_data_nascimento']);
+		$this->iSexo = $aDados['cle_sexo'];
+		$this->sEmail = $aDados['cle_email'];
+		$this->sTelefone = $aDados['cle_telefone'];
+		$this->setSenha($aDados['cle_senha']);
+		$this->sCEP = $aDados['cle_cep'];
+		$this->sLogradouro = $aDados['cle_logradouro'];
+		$this->sBairro = $aDados['cle_bairro'];
+		$this->sEstado = $aDados['cle_estado'];
+		$this->sCidade = $aDados['cle_cidade'];
+		$this->iNumero = $aDados['cle_numero'];
+		$this->sComplemento = $aDados['cle_complemento'];
+		$this->oDataCadastro = new \DateTimeImmutable("now");
+
+		Sistema::getClienteDAO()->save($this);
 	}
 
 	public function atualizar(): void {
@@ -467,6 +573,25 @@ class Cliente {
 	}
 
 	public function getPedidos(): PedidoList {
-		// TODO: Implementar.
+		return new PedidoList();
+	}
+
+	/**
+	 * Verifica se o CPF informado no cadastro já está cadastrado
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	private function checarCadastroDuplicado(array $aDados): void{
+		$sCPF = str_replace(".","",str_replace("-","",$aDados['cle_cpf']));
+
+		if (Sistema::getClienteDAO()->hasCPFCadastrado($sCPF)) {
+			$sMensagem = "O CPF informado já possui cadastro. Faça o <a href='../login'>login aqui</a>.";
+			throw new \Exception($sMensagem);
+		}
 	}
 }

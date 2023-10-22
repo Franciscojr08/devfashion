@@ -2,6 +2,9 @@
 
 namespace DevFashion\Src\Controllers\Login;
 
+use DevFashion\Core\Session;
+use DevFashion\Src\Sistema\Sistema;
+
 /**
  * Class loginController
  * @package DevFashion\Src\Controllers\Login
@@ -13,7 +16,7 @@ class loginController {
 	 * Renderiza a view de login
 	 *
 	 * @param array $aDados
-	 * @author Francisco Santos franciscosantos@moobitech.com.br
+	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
@@ -26,7 +29,7 @@ class loginController {
 	 * Renderiza a view de cadastro
 	 *
 	 * @param array $aDados
-	 * @author Francisco Santos franciscosantos@moobitech.com.br
+	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
@@ -40,12 +43,35 @@ class loginController {
 			header("location: ../login");
 		}
 
-		// TODO: Implementar.
-		// Gerar Hash senha: password_hash($sSenha,PASSWORD_BCRYPT, ['cost' => 11])
-		// Verificar Hash senha: password_verify($sSenha, $sHash)
+		try {
+			$oCliente = Sistema::getClienteDAO()->findByEmail($aDados['cle_email']);
+			if (!$oCliente->hasId()) {
+				throw new \Exception("Falha ao logar. E-mail ou senha incorretos.");
+			}
+
+			if (!password_verify($aDados['cle_senha'],$oCliente->getSenha())) {
+				throw new \Exception("Falha ao logar. E-mail ou senha incorretos.");
+			}
+
+			Session::setClienteId($oCliente->getId());
+			header("location: ../cliente/espaco");
+		} catch (\Exception $oExp) {
+			Session::setMensagem($oExp->getMessage());
+			header("location: ../login");
+		}
 	}
 
-	public function cadastrar(array $aDados): void {
-		// TODO: Implementar.
+	/**
+	 * Faz o logout do cliente logado
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscosantos@moobitech.com.br
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function logout(array $aDados): void {
+		Session::destroy();
+		header("location: ../home");
 	}
 }

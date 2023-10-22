@@ -10,18 +10,6 @@ namespace DevFashion\Core;
 class Session {
 
 	/**
-	 * Session Construtor
-	 *
-	 * @author Francisco Santos franciscojuniordh@gmail.com
-	 * @return void
-	 *
-	 * @since 1.0.0 - Definição do versionamento da classe
-	 */
-	public function __construct() {
-		self::iniciar();
-	}
-
-	/**
 	 * Verifica se a sessão foi iniciada, se não foi é iniciada uma sessão
 	 *
 	 * @author Francisco Santos franciscojuniordh@gmail.com
@@ -30,9 +18,7 @@ class Session {
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
 	public static function iniciar(): void {
-		if (session_status() !== PHP_SESSION_ACTIVE) {
-			session_start();
-		}
+		session_start();
 	}
 
 	/**
@@ -73,5 +59,42 @@ class Session {
 	public static function setClienteId(int $iCleId): void {
 		self::iniciar();
 		$_SESSION['cle_id'] = $iCleId;
+	}
+
+	public static function getMensagem(): string {
+		self::iniciar();
+		return $_SESSION['mensagem'];
+	}
+
+	public static function hasMensagem(): bool {
+		self::iniciar();
+		return !empty($_SESSION['mensagem']);
+	}
+
+	public static function setMensagem(string $sMensagem): void	{
+		self::iniciar();
+		$_SESSION['mensagem'] = $sMensagem;
+	}
+
+	public static function removerMensagem(): void {
+		self::iniciar();
+		unset($_SESSION['mensagem']);
+	}
+
+	/**
+	 * Finaliza a sessão
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public static function destroy(): void {
+		session_start();
+		session_unset();
+		session_destroy();
+		session_write_close();
+		setcookie(session_name(),'',0,'/');
+		session_regenerate_id(true);
 	}
 }

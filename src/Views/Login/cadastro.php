@@ -1,6 +1,7 @@
 <?php
 
 use DevFashion\Core\Functions;
+use DevFashion\Core\Session;
 
 /**
  * @var array $aDados
@@ -23,9 +24,21 @@ use DevFashion\Core\Functions;
 <body>
 <?php Functions::renderMenu($aDados); ?>
 
+<?php if (Session::hasMensagem()) { ?>
+	<div style="width: 60%; margin: 0 auto;">
+		<div class="alert alert-warning" role="alert">
+			<i class="fa-solid fa-triangle-exclamation"></i>
+			<?php
+				echo Session::getMensagem();
+				Session::removerMensagem();
+			?>
+		</div>
+	</div>
+<?php } ?>
+
 <main class="main_login_cadastro">
-	<form class="custom-form" id="cadastro" name="formC" action="../login/cadastrar" type="post">
-		<h1 class="mb-2 text-center"><strong>CADASTRO</strong></h1>
+	<form class="custom-form" id="cadastro" name="formC" action="../cliente/cadastrar" type="post">
+		<h2 class="mb-4 text-center">Cadastre-se</h2>
 		<div>
 			<h4>Dados Pessoais<em style="color: red">*</em></h4>
 		</div>
@@ -33,7 +46,7 @@ use DevFashion\Core\Functions;
 		<div class="row g-3 mb-2">
 			<div class="col">
 				<label for="nome" class="form-label mb-1">Nome Completo</label>
-				<input type="text" class="form-control" id="nome" placeholder="Nome" name="cle_nome" required>
+				<input type="text" class="form-control" id="nome" placeholder="Nome" maxlength="100" name="cle_nome" required>
 			</div>
 		</div>
 
@@ -52,14 +65,14 @@ use DevFashion\Core\Functions;
 
 		<div class="mb-2">
 			<label for="email" class="form-label mb-1">Email</label>
-			<input type="email" class="form-control" id="email" onblur="validacaoEmail(formC.email)" placeholder="Email" name="cle_email" required>
+			<input type="email" class="form-control" id="email" onblur="validacaoEmail(formC.email)" placeholder="Email" maxlength="50" name="cle_email" required>
 			<div id="msgemail"></div>
 		</div>
 
 		<div class="row mb-2">
 			<div class="col-md-6">
 				<label for="senha" class="form-label mb-1">Senha</label>
-				<input type="password" class="form-control" id="senha" placeholder="Senha" name="cle_senha" required>
+				<input type="password" class="form-control" id="senha" placeholder="Senha" maxlength="50" name="cle_senha" required>
 			</div>
 
 			<div class="col-md-6">
@@ -92,41 +105,41 @@ use DevFashion\Core\Functions;
 		<div class="row g-3 mb-2 align-items-center">
 			<div class="col-3">
 				<label for="cep" class="form-label">CEP</label>
-				<input type="text" class="form-control" id="cep" name="cle_cep" placeholder="CEP" required>
+				<input type="text" class="form-control" id="cep" maxlength="8" name="cle_cep" placeholder="CEP" required>
 				<div id="cepErr"></div>
 			</div>
 	
 			<div class="col-2">
 				<label for="uf" class="form-label">UF</label>
-				<input type="text" class="form-control" id="uf" name="cle_estado" placeholder="UF" required>
+				<input type="text" class="form-control" id="uf" maxlength="50" name="cle_estado" placeholder="UF" required>
 			</div>
 	
 			<div class="col">
 				<label for="cidade" class="form-label">Cidade</label>
-				<input type="text" class="form-control" id="cidade" name="cle_cidade" placeholder="Cidade" required>
+				<input type="text" class="form-control" id="cidade" maxlength="50" name="cle_cidade" placeholder="Cidade" required>
 			</div>
 		</div>
 
 		<div class="row g-3 mb-2">
 			<div class="col-md-8">
 				<label for="logradouro" class="form-label">Logradouro</label>
-				<input type="text" class="form-control" id="logradouro" name="cle_logradouro" placeholder="Logradouro" required>
+				<input type="text" class="form-control" id="logradouro" maxlength="100" name="cle_logradouro" placeholder="Logradouro" required>
 			</div>
 
 			<div class="col-md-4">
 				<label for="numero" class="form-label">Número</label>
-				<input type="text" class="form-control" id="numero" name="cle_numero" placeholder="Número" required>
+				<input type="text" class="form-control" id="numero" maxlength="50" name="cle_numero" placeholder="Número" required>
 			</div>
 		</div>
 
 		<div class="mb-2">
 			<label for="bairro" class="form-label">Bairro</label>
-			<input type="text" class="form-control" id="bairro" name="cle_bairro" placeholder="Bairro" required>
+			<input type="text" class="form-control" id="bairro" maxlength="50" name="cle_bairro" placeholder="Bairro" required>
 		</div>
 
 		<div class="mb-2">
 			<label for="complemento" class="form-label">Complemento</label>
-			<input type="text" class="form-control" id="complemento" name="cle_complemento" placeholder="Complemento" required>
+			<input type="text" class="form-control" id="complemento" maxlength="100" name="cle_complemento" placeholder="Complemento">
 		</div>
 
 			<div class="form-group mt-3 text-center d-grid gap-2 mx-auto">

@@ -13,8 +13,8 @@ create table cle_cliente
     cle_bairro          VARCHAR(50)  NOT NULL,
     cle_estado          VARCHAR(50)  NOT NULL,
     cle_cidade          VARCHAR(50)  NOT NULL,
-    cle_complemento     VARCHAR(100) NOT NULL,
-    cle_numero          varchar(50)  not null,
+    cle_complemento     VARCHAR(100) NULL,
+    cle_numero          varchar(50)  NOT NULL,
     cle_data_cadastro   DATE         NOT NULL
 ) ENGINE = MyISAM  DEFAULT CHARSET = UTF8MB4;
 

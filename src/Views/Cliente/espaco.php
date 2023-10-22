@@ -1,8 +1,12 @@
 <?php
 
 use DevFashion\Core\Functions;
+use DevFashion\Src\Cliente\Cliente;
 
-/** @var array $aDados */
+/**
+ * @var array $aDados
+ * @var Cliente $oCliente
+ */
 ?>
 
 <!doctype html>
