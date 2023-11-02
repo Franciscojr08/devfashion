@@ -63,8 +63,10 @@ function validacaoEmail(field) {
         (dominio.indexOf(".") >= 1) &&
         (dominio.lastIndexOf(".") < dominio.length - 1)) {
         emailCorreto = true
+        return true
     } else {
         document.getElementById("msgemail").innerHTML = "<font color='red'>E-mail inválido </font>";
+        return false
     }
 }
 
@@ -74,6 +76,7 @@ function validarSenha() {
         return false
     } else {
         document.getElementById("senhaErr").innerHTML = ""
+        return true
     }
 }
 
@@ -106,7 +109,6 @@ function TestaCPF(cpf) {
             document.getElementById("msgCpf").innerHTML = "<font color='red'>CPF inválido </font>"
             return false;
         }
-        console.log(true)
         document.getElementById("msgCpf").innerHTML = "";
         return true;
     } else {
@@ -114,4 +116,16 @@ function TestaCPF(cpf) {
         return false;
     }
 
+}
+
+function validarForm(){
+    if (TestaCPF(numeroCpf.value.replaceAll('.', '').replace('-', '')) &&
+        validarSenha() &&
+        validacaoEmail(email)){
+        document.getElementById("cadastro").submit()
+        return true
+    }else{
+        alert("REVISE OS DADOS PREENCHIDOS")
+        return false
+    }
 }
