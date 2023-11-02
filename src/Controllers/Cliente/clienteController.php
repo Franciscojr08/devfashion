@@ -58,7 +58,7 @@ class clienteController {
 			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
 			$loPedidos = $oCliente->getPedidos();
 
-			require_once "Cliente/espaco.php";
+			require_once "Cliente/Espaco/espaco.php";
 		} catch (\Exception $oExp) {
 			$oErroController = new errorController();
 			$oErroController->errorExeption($aDados, $oExp->getMessage(), $oExp->getCode());

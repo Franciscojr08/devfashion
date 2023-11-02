@@ -8,7 +8,6 @@ use DevFashion\Src\Cliente\Cliente;
  * @var Cliente $oCliente
  */
 ?>
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -18,15 +17,26 @@ use DevFashion\Src\Cliente\Cliente;
 
 	<title>DevFashion</title>
 	<?php
-		Functions::addFavicon();
-		Functions::addStyleSheet(["css/style.css"]);
+	Functions::addFavicon();
+	Functions::addStyleSheet(["css/style.css"]);
 	?>
 </head>
 <body>
 <?php Functions::renderMenu($aDados); ?>
 
+<div class="container">
+	<p>aaa</p>
 
+</div>
+
+
+<script>
+
+</script>
 <?php Functions::renderFooter(); ?>
 <?php Functions::addScript(); ?>
 </body>
+<style>
+
+</style>
 </html>
