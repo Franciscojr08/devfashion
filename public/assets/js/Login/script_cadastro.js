@@ -117,6 +117,16 @@ function TestaCPF(cpf) {
     }
 
 }
+function setSex(){
+    var sexoId = "2"
+    if (sexoId === "1"){
+        document.getElementById('sexo').selectedIndex = 0
+    }else if(sexoId  === "2"){
+        document.getElementById('sexo').selectedIndex = 1
+    }else if(sexoId  === "3"){
+        document.getElementById('sexo').selectedIndex = 2
+    }
+}
 
 function validarForm(){
     if (TestaCPF(numeroCpf.value.replaceAll('.', '').replace('-', '')) &&
