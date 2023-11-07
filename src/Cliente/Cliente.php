@@ -50,6 +50,7 @@ class Cliente {
 		$oCliente->sNome = $aDados['cle_nome'];
 		$oCliente->sCPF = $aDados['cle_cpf'];
 		$oCliente->oDataNascimento = new \DateTimeImmutable($aDados['cle_data_nascimento']);
+		$oCliente->iSexo = $aDados['cle_sexo'];
 		$oCliente->sEmail = $aDados['cle_email'];
 		$oCliente->sTelefone = $aDados['cle_telefone'];
 		$oCliente->sCEP = $aDados['cle_cep'];
@@ -57,6 +58,7 @@ class Cliente {
 		$oCliente->sBairro = $aDados['cle_bairro'];
 		$oCliente->sEstado = $aDados['cle_estado'];
 		$oCliente->sCidade = $aDados['cle_cidade'];
+		$oCliente->iNumero = $aDados['cle_numero'];
 		$oCliente->sComplemento = $aDados['cle_complemento'];
 		$oCliente->oDataCadastro = new \DateTimeImmutable($aDados['cle_data_cadastro']);
 		$oCliente->sSenha = $aDados['cle_senha'];
