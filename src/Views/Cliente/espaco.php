@@ -39,7 +39,6 @@ use DevFashion\Src\Pedido\PedidoList;
             <div class="tab-content" >
                 <div class="tab-pane fade show active mb-3" id="dadosPessoais">
                     <!-- Formulário de Dados Pessoais -->
-                <form class="formulario">
                     <div class="row g-3 mb-2">
                         <div class="col">
                             <label for="nome" class="form-label mb-1">Nome Completo</label>
@@ -59,9 +58,6 @@ use DevFashion\Src\Pedido\PedidoList;
                             <input type="tel" class="form-control" id="telefone" maxlength="11" placeholder="(xx) xxxxx-xxxx" name="cle_telefone"  value="<?php echo $oCliente->getTelefone();?>" required>
                         </div>
                     </div>
-                </form>
-
-
                     <div class="mb-2">
                         <label for="email" class="form-label mb-1">Email</label>
                         <input type="email" class="form-control text-bg-light" id="email" onblur="validacaoEmail(formC.email)" placeholder="Email" maxlength="50" name="cle_email" value="<?php echo $oCliente->getEmail();?>" required readonly>
@@ -96,7 +92,6 @@ use DevFashion\Src\Pedido\PedidoList;
                             </select>
                         </div>
                     </div>
-
                 </div>
                 <div class="tab-pane fade mb-3" id="endereco">
                     <!-- Formulário de Endereço -->
