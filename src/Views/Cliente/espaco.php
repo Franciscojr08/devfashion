@@ -2,10 +2,11 @@
 
 use DevFashion\Core\Functions;
 use DevFashion\Src\Cliente\Cliente;
-
+use DevFashion\Src\Pedido\PedidoList;
 /**
  * @var array $aDados
  * @var Cliente $oCliente
+ * @var PedidoList $loPedidos
  */
 ?>
 
@@ -22,40 +23,23 @@ use DevFashion\Src\Cliente\Cliente;
 		Functions::addStyleSheet(["css/style.css"]);
 	?>
 </head>
-<body>
+<body >
 <?php Functions::renderMenu($aDados); ?>
-
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-auto"-->
-<!--            <p><a href="/espaco">Meus Pedidos</a></p>-->
-<!--            <button onclick='carregarDados()'>Dados Pessoais </button>-->
-<!--            <p><a href="/endereco">Endereço</a></p>-->
-<!---->
-<!---->
-<!--        </div>-->
-<!--        <div class="col d-flex justify-content-center " id="info">-->
-<!--            <div>a</div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!---->
-<!--</div>-->
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" >
             <ul class="list-group">
-                <li class="list-group-item list-group-item-action" data-bs-toggle="tab" data-bs-target="#dadosPessoais">Dados Pessoais</li>
+                <li class="list-group-item list-group-item-action active" data-bs-toggle="tab" data-bs-target="#dadosPessoais">Dados Pessoais</li>
                 <li class="list-group-item list-group-item-action" data-bs-toggle="tab" data-bs-target="#endereco">Endereço</li>
                 <li class="list-group-item list-group-item-action mb-5" data-bs-toggle="tab" data-bs-target="#meusPedidos">Meus Pedidos</li>
             </ul>
         </div>
         <div class="col-md-9">
-            <div class="tab-content">
-                <div class="tab-pane fade mb-3" id="dadosPessoais">
+            <div class="tab-content" >
+                <div class="tab-pane fade show active mb-3" id="dadosPessoais">
                     <!-- Formulário de Dados Pessoais -->
-
+                <form class="formulario">
                     <div class="row g-3 mb-2">
                         <div class="col">
                             <label for="nome" class="form-label mb-1">Nome Completo</label>
@@ -75,6 +59,8 @@ use DevFashion\Src\Cliente\Cliente;
                             <input type="tel" class="form-control" id="telefone" maxlength="11" placeholder="(xx) xxxxx-xxxx" name="cle_telefone"  value="<?php echo $oCliente->getTelefone();?>" required>
                         </div>
                     </div>
+                </form>
+
 
                     <div class="mb-2">
                         <label for="email" class="form-label mb-1">Email</label>
@@ -103,7 +89,7 @@ use DevFashion\Src\Cliente\Cliente;
 
                         <div class="col-md-6 mb-3">
                             <label for="sexo" class="form-label mb-1">Sexo</label>
-                            <select id="sexo" class="form-select" onload="setSex()" name="cle_sexo" required>
+                            <select id="sexo" class="form-select" name="cle_sexo"  required>
                                 <option value="1">Masculino</option>
                                 <option value="2">Feminino</option>
                                 <option value="3">Outro</option>
@@ -140,7 +126,7 @@ use DevFashion\Src\Cliente\Cliente;
 
                         <div class="col-md-4">
                             <label for="numero" class="form-label">Número</label>
-                            <input type="text" class="form-control" id="numero" maxlength="50" name="cle_numero" placeholder="Número" value="<?php ?>" required>
+                            <input type="text" class="form-control" id="numero" maxlength="50" name="cle_numero" placeholder="Número" value="<?php echo $oCliente->getNumeroEndereco()?>" required>
                         </div>
                     </div>
 
@@ -157,6 +143,16 @@ use DevFashion\Src\Cliente\Cliente;
                 <div class="tab-pane fade" id="meusPedidos">
                     <!-- Lista de Pedidos -->
                     <h2>Meus Pedidos</h2>
+<!----><?php
+////
+////                        foreach ($loPedidos as $pedido){
+////                            Functions::
+////                        }
+////                    ?>
+<!--                            <div class="d-flex">-->
+<!--                                <div> <img src=""></div>-->
+<!---->
+<!--                            </div>-->
                     <!-- Inclua aqui a lista de pedidos do usuário -->
                 </div>
             </div>
@@ -164,23 +160,16 @@ use DevFashion\Src\Cliente\Cliente;
     </div>
 </div>
 <script>
-    //function setSex(){
-    //    const sexoId = "<?php //echo $oCliente->getSexoIdEnum();?>//"
-    //    if (sexoId === "1"){
-    //        document.getElementById('sexo').selectedIndex = 0
-    //    }else if(sexoId  === "2"){
-    //        document.getElementById('sexo').selectedIndex = 1
-    //    }else if(sexoId  === "3"){
-    //        document.getElementById('sexo').selectedIndex = 2
-    //    }
-    //}
-
+    document.getElementById('sexo').value = "<?php echo $oCliente->getSexoIdEnum(); ?>"
 </script>
 <?php Functions::renderFooter(); ?>
 <?php Functions::addScript(["js/Login/script_cadastro.js"]); ?>
 
 </body>
+<script>
 
+
+</script>
 <style>
 
 </style>
