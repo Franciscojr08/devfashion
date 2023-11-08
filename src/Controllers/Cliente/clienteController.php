@@ -99,13 +99,17 @@ class clienteController {
 
 	public function atualizarCliente(array $aDados): void {
 		try {
-			$oCliente = new Cliente();
+			if (!Session::hasClienteLogado()) {
+				throw new \Exception("É necessário está logado para realizar esta ação.");
+			}
+
+			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
 			$oCliente->atualizar($aDados);
 
 			header("location: ../cliente/espaco");
 		} catch (\Exception $oExp) {
 			Session::setMensagem($oExp->getMessage());
-
+			header("location: ../cliente/espaco");
 		}
 	}
 

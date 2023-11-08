@@ -119,20 +119,20 @@ class ClienteDAO {
 		$oConnection = Sistema::connection();
 		$sSQL ="UPDATE cle_cliente
 			SET cle_nome = ?,
-		    SET cle_data_nascimento = ?, 
-		    SET cle_sexo = ?, 
-		    SET cle_telefone = ?, 
-		    SET cle_senha = ?,
-		    SET cle_cpf = ?,
-		    SET cle_email = ?,
-		    SET cle_cep = ?,
-			SET cle_logradouro = ?,
-			SET cle_bairro = ?,
-			SET cle_estado = ?,
-			SET cle_cidade = ?,
-			SET cle_complemento = ?,
-			SET cle_numero = ?
-		    WHERE ID = ?";
+		    cle_data_nascimento = ?, 
+		    cle_sexo = ?, 
+		    cle_telefone = ?, 
+		    cle_senha = ?,
+		    cle_cpf = ?,
+		    cle_email = ?,
+		    cle_cep = ?,
+			cle_logradouro = ?,
+			cle_bairro = ?,
+			cle_estado = ?,
+			cle_cidade = ?,
+			cle_complemento = ?,
+			cle_numero = ?
+		    WHERE cle_id = ?";
 
 		$aParams = [
 			$oCliente->getNome(),
@@ -154,7 +154,6 @@ class ClienteDAO {
 
 		try {
 			$oConnection->execute($sSQL,$aParams);
-			$oCliente->setId($oConnection->getLasInsertId());
 		} catch (\PDOException $oExp) {
 			throw new \Exception("Não foi possível cadastrar o cliente");
 		}

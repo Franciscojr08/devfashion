@@ -39,7 +39,7 @@ use DevFashion\Src\Pedido\PedidoList;
             <div class="tab-content" >
                 <div class="tab-pane fade show active mb-3" id="dadosPessoais">
                     <!-- Formulário de Dados Pessoais -->
-                   <form id="formulario" name="formulario" type="post" action="./cliente/atualizar">
+                   <form id="formulario" name="formulario" type="post" action="../cliente/atualizarCliente">
                         <div class="row g-3 mb-2">
                             <div class="col">
                                 <label for="nome" class="form-label mb-1">Nome Completo</label>
@@ -161,12 +161,10 @@ use DevFashion\Src\Pedido\PedidoList;
 
 </body>
 <script>
-<!--	--><?php //$senha = "<script>document.getElementById('senha').value</script>";
-//	?>
 
-
-    //var senha = document.getElementById('cle_senha')
     //function validarSenha(){
+	//    <?php //$senha = "<script>document.getElementById('senha').value</script>";
+	//    ?>
     //    if (<?php //echo password_verify($senha, $oCliente->getSenha())?"TRUE":"FALSE";?>// === "TRUE"){
     //        alert("aa")
     //        document.getElementById("senhaErr").innerHTML = ""
