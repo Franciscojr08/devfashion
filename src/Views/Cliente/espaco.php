@@ -144,7 +144,6 @@ use DevFashion\Src\Pedido\PedidoList;
                     </div>
                 <div class="tab-pane fade" id="meusPedidos">
                     <!-- Lista de Pedidos -->
-                    <h2>Meus Pedidos</h2>
                     <div class="card mb-3" style="max-width: 540px; ">
                         <div class="row g-0">
                             <div class="col-md-4">
