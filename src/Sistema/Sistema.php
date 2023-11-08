@@ -5,6 +5,7 @@ namespace DevFashion\Src\Sistema;
 use DevFashion\Src\Carrinho\CarrinhoDAO;
 use DevFashion\Src\Cliente\ClienteDAO;
 use DevFashion\Src\ListaDesejos\ListaDesejosDAO;
+use DevFashion\Src\Pedido\PedidoDAO;
 use DevFashion\Src\Roupa\RoupaDAO;
 use DevFashion\Src\Sistema\Connection\Connection;
 use DevFashion\Src\Sistema\Connection\ConnectionInterface;
@@ -74,5 +75,17 @@ class Sistema {
 	 */
 	public static function getListaDesejosDAO(): ListaDesejosDAO {
 		return new ListaDesejosDAO();
+	}
+
+	/**
+	 * Retorna o DAO de pedido
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return PedidoDAO
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public static function getPedidoDAO(): PedidoDAO {
+		return new PedidoDAO();
 	}
 }

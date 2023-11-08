@@ -123,7 +123,7 @@ class Roupa {
 	public function getTipo(): int {
 		return $this->iTipo;
 	}
-	
+
 	/**
 	 * Atribui o tipo da roupa
 	 *
@@ -215,5 +215,68 @@ class Roupa {
 
 		$oListaDesejos = $oCliente->getListaDesejos();
 		$oListaDesejos->removerRoupa($this);
+	}
+
+	/**
+	 * Adiciona a roupa ao carrinho
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function adicionarAoCarrinho(): void {
+		if (!Session::hasClienteLogado()) {
+			throw new \Exception("É necessário está logado para realizar esta ação.");
+		}
+
+		$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+		$oCarrinho = $oCliente->getCarrinho();
+
+		if ($oCarrinho->hasRoupa($this)) {
+			throw new \Exception("Essa roupa já está no seu carrinho.");
+		}
+
+		$oCarrinho->adicionarRoupa($this);
+	}
+	
+	/**
+	 * Retorna a descrição do parcelamento padrão
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return string
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getDescricaoParcelamento(): string {
+		$fPreco = $this->fPreco / 3;
+		$fPreco = "R$ " . number_format($fPreco,2,",",".");
+
+		return "Em até <b>3x</b> de $fPreco";
+	}
+
+	/**
+	 * Remove a roupa do carrinho
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function removerDoCarrinho(): void {
+		if (!Session::hasClienteLogado()) {
+			throw new \Exception("É necessário está logado para realizar esta ação.");
+		}
+
+		$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+		$oCarrinho = $oCliente->getCarrinho();
+
+		if (!$oCarrinho->hasRoupa($this)) {
+			throw new \Exception("Essa roupa não está no seu carrinho.");
+		}
+
+		$oCarrinho->removerRoupa($this);
 	}
 }

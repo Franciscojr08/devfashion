@@ -4,6 +4,7 @@ namespace DevFashion\Src\Cliente;
 
 use DevFashion\Src\Carrinho\Carrinho;
 use DevFashion\Src\ListaDesejos\ListaDesejos;
+use DevFashion\Src\Pedido\Pedido;
 use DevFashion\Src\Pedido\PedidoList;
 use DevFashion\Src\Roupa\RoupaList;
 use DevFashion\Src\Sistema\Enum\SexoEnum;
@@ -33,6 +34,7 @@ class Cliente {
 	private \DateTimeImmutable $oDataCadastro;
 	private string $sSenha;
 	private ListaDesejos $oListaDesejos;
+	private Carrinho $oCarrinho;
 
 	/**
 	 * Cria um objeto Cliente a partir de um array
@@ -47,19 +49,9 @@ class Cliente {
 	public static function createFromArray(array $aDados): Cliente {
 		$oCliente = new Cliente();
 		$oCliente->iId = $aDados['cle_id'];
-		$oCliente->sNome = $aDados['cle_nome'];
-		$oCliente->sCPF = $aDados['cle_cpf'];
-		$oCliente->oDataNascimento = new \DateTimeImmutable($aDados['cle_data_nascimento']);
-		$oCliente->sEmail = $aDados['cle_email'];
-		$oCliente->sTelefone = $aDados['cle_telefone'];
-		$oCliente->sCEP = $aDados['cle_cep'];
-		$oCliente->sLogradouro = $aDados['cle_logradouro'];
-		$oCliente->sBairro = $aDados['cle_bairro'];
-		$oCliente->sEstado = $aDados['cle_estado'];
-		$oCliente->sCidade = $aDados['cle_cidade'];
-		$oCliente->sComplemento = $aDados['cle_complemento'];
 		$oCliente->oDataCadastro = new \DateTimeImmutable($aDados['cle_data_cadastro']);
 		$oCliente->sSenha = $aDados['cle_senha'];
+		$oCliente->setDados($aDados);
 
 		return $oCliente;
 	}
@@ -364,6 +356,18 @@ class Cliente {
 	}
 
 	/**
+	 * Retorna se possui complemento
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return bool
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function hasComplemento(): bool {
+		return !empty($this->sComplemento);
+	}
+
+	/**
 	 * Atribui o complemento
 	 *
 	 * @param string $sComplemento
@@ -501,37 +505,59 @@ class Cliente {
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
 	public function cadastrar(array $aDados): void {
-		$this->checarCadastroDuplicado($aDados);
+		if ($this->hasCPFCadastrado($aDados)) {
+			$sMensagem = "O CPF informado já possui cadastro. Faça o <a href='../../login'>login aqui</a>.";
+			throw new \Exception($sMensagem);
+		}
 
-		$this->sNome = $aDados['cle_nome'];
-		$this->sCPF = str_replace(".","",str_replace("-","",$aDados['cle_cpf']));
-		$this->oDataNascimento = new \DateTimeImmutable($aDados['cle_data_nascimento']);
-		$this->iSexo = $aDados['cle_sexo'];
-		$this->sEmail = $aDados['cle_email'];
-		$this->sTelefone = $aDados['cle_telefone'];
+		$this->setDados($aDados);
 		$this->setSenha($aDados['cle_senha']);
-		$this->sCEP = $aDados['cle_cep'];
-		$this->sLogradouro = $aDados['cle_logradouro'];
-		$this->sBairro = $aDados['cle_bairro'];
-		$this->sEstado = $aDados['cle_estado'];
-		$this->sCidade = $aDados['cle_cidade'];
-		$this->iNumero = $aDados['cle_numero'];
-		$this->sComplemento = $aDados['cle_complemento'];
 		$this->oDataCadastro = new \DateTimeImmutable("now");
 
 		Sistema::getClienteDAO()->save($this);
 	}
 
-	public function atualizar(): void {
-		// TODO: Implementar.
+	/**
+	 * Atualiza as informações do cliente
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function atualizar(array $aDados): void {
+		if ($this->hasCPFCadastrado($aDados)) {
+			$sMensagem = "O CPF informado já possui cadastro.";
+			throw new \Exception($sMensagem);
+		}
+
+		$this->setDados($aDados);
+		Sistema::getClienteDAO()->update($this);
 	}
 
-	public function excluirCadastro(): void {
-		// TODO: Implementar.
-	}
-
+	/**
+	 * Retorna o carrinho
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return Carrinho
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
 	public function getCarrinho(): Carrinho	{
-		// TODO: Implementar.
+		if (empty($this->oCarrinho)) {
+			if (Sistema::getCarrinhoDAO()->hasCarrinho($this)) {
+				$this->oCarrinho = Sistema::getCarrinhoDAO()->findByCliente($this);
+			} else {
+				$oCarrinho = new Carrinho();
+				$oCarrinho->cadastrar($this);
+				$this->oCarrinho = $oCarrinho;
+			}
+		}
+
+		return $this->oCarrinho;
 	}
 
 	/**
@@ -581,17 +607,98 @@ class Cliente {
 	 *
 	 * @param array $aDados
 	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return bool
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	private function hasCPFCadastrado(array $aDados): bool {
+		$sCPF = str_replace(".","",str_replace("-","",$aDados['cle_cpf']));
+
+		return Sistema::getClienteDAO()->hasCPFCadastrado($sCPF);
+	}
+
+	/**
+	 * Atribui os dados do array ao cliente
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 * @throws \Exception
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
-	private function checarCadastroDuplicado(array $aDados): void{
-		$sCPF = str_replace(".","",str_replace("-","",$aDados['cle_cpf']));
+	private function setDados(array $aDados): void {
+		$this->sNome = $aDados['cle_nome'];
+		$this->sCPF = str_replace(".","",str_replace("-","",$aDados['cle_cpf']));
+		$this->oDataNascimento = new \DateTimeImmutable($aDados['cle_data_nascimento']);
+		$this->iSexo = $aDados['cle_sexo'];
+		$this->sEmail = $aDados['cle_email'];
+		$this->sTelefone = $aDados['cle_telefone'];
+		$this->sCEP = $aDados['cle_cep'];
+		$this->sLogradouro = $aDados['cle_logradouro'];
+		$this->sBairro = $aDados['cle_bairro'];
+		$this->sEstado = $aDados['cle_estado'];
+		$this->sCidade = $aDados['cle_cidade'];
+		$this->iNumero = $aDados['cle_numero'];
+		$this->sComplemento = $aDados['cle_complemento'] ?? "";
+	}
 
-		if (Sistema::getClienteDAO()->hasCPFCadastrado($sCPF)) {
-			$sMensagem = "O CPF informado já possui cadastro. Faça o <a href='../login'>login aqui</a>.";
-			throw new \Exception($sMensagem);
+	/**
+	 * Retorna a quantidade de roupas no carrinho
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return int
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getQuantidadeRoupasNoCarrinho(): int {
+		$oCarrinho = $this->getCarrinho();
+		$loRoupas = $oCarrinho->getRoupas();
+
+		return $loRoupas->count() ?? 0;
+	}
+
+	/**
+	 * Cadastra um pedido do cliente
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function cadastrarPedido(array $aDados): void {
+		$oPedido = new Pedido();
+		$oPedido->setCliente($this);
+		$oPedido->setRoupas($this->consultarRoupasPedido($aDados));
+		$oPedido->setValorPedido($aDados['pdo_valor']);
+		$oPedido->cadastrar();
+
+		$this->getCarrinho()->limpar();
+	}
+
+	/**
+	 * Consulta as roupas do pedido
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return RoupaList
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	private function consultarRoupasPedido(array $aDados): RoupaList {
+		$aRpaId = explode(",",$aDados['sRpaId']);
+		$loRoupas = new RoupaList();
+
+		foreach ($aRpaId as $iRpaId) {
+			$oRoupa = Sistema::getRoupaDAO()->find($iRpaId);
+			$loRoupas->attach($oRoupa);
 		}
+
+		return $loRoupas;
 	}
 }

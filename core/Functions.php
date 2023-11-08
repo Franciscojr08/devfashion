@@ -62,7 +62,7 @@ class Functions {
 		$aCss = array_merge($aCssPadrao,$aCss);
 
 		foreach ($aCss as $sCss) {
-			echo PHP_EOL . "<link rel='stylesheet' href='../public/assets/$sCss?$sTimeStamp'>";
+			echo PHP_EOL . "<link rel='stylesheet' href='../../public/assets/$sCss?$sTimeStamp'>";
 		}
 
 		echo PHP_EOL . "<link href=\"https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap\" rel=\"stylesheet\">";
@@ -91,7 +91,7 @@ class Functions {
 		$aJs = array_merge($aJsPadrao,$aScript);
 
 		foreach ($aJs as $sJs) {
-			echo PHP_EOL . "<script type='text/javascript' src='../public/assets/$sJs?$sTimeStamp'></script>";
+			echo PHP_EOL . "<script type='text/javascript' src='../../public/assets/$sJs?$sTimeStamp'></script>";
 		}
 	}
 
@@ -104,7 +104,7 @@ class Functions {
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
 	public static function addFavicon(): void {
-		echo "<link rel=\"shortcut icon\" href=\"../public/assets/img/favicon.png\">";
+		echo "<link rel=\"shortcut icon\" href=\"../../public/assets/img/favicon.png\">";
 	}
 
 	/**
@@ -114,16 +114,17 @@ class Functions {
 	 * @param string $sFormato
 	 * @param string $sLink
 	 * @param string|null $sAlt
+	 * @param string|null $sClass
 	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
-	public static function addImage(string $sNomeImagem, string $sFormato, string $sLink, string $sAlt = null): void {
+	public static function addImage(string $sNomeImagem, string $sFormato, string $sLink, string $sAlt = null, string $sClass = null): void {
 		$oData = new \DateTimeImmutable("now");
 		$sTimeStamp = $oData->getTimestamp();
 
-		echo "<a href=\"$sLink\"><img src='../public/assets/img/$sNomeImagem.$sFormato?$sTimeStamp' alt='$sAlt'></a>";
+		echo "<a href=\"$sLink\"><img src='../../public/assets/img/$sNomeImagem.$sFormato?$sTimeStamp' alt='$sAlt' class='$sClass'></a>";
 	}
 
 	/**
@@ -151,15 +152,15 @@ class Functions {
 		echo "
 			<div class=\"produto\">
 				<p>{$sNome}</p>
-				<img src='../public/assets/img/{$oRoupa->getCaminhoImagem()}.jpg?$sTimeStamp'>
+				<img src='../../public/assets/img/{$oRoupa->getCaminhoImagem()}.jpg?$sTimeStamp'>
 				<p>
 					Preço: {$oRoupa->getDescricaoPreco()}
 					<span class=\"nav-project-icons btn_lista_desejos\" data-id=\"{$oRoupa->getId()}\">
 						$sIcon
 					</span>
 				</p>
-				<button>Detalhes</button>
-				<button>Adicionar ao Carrinho</button>
+				<a href=\"../../shop/visualizar/{$oRoupa->getId()}\">Detalhes</a>
+				<button class=\"btn_add_roupa\" data-id=\"{$oRoupa->getId()}\">Adicionar ao Carrinho</button>
 				<input type='hidden' id='lista_desejo_{$oRoupa->getId()}' value='$iPadrao'>
 			</div>
 		";

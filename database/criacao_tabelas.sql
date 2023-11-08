@@ -29,10 +29,12 @@ create table rpa_roupa
 
 create table pdo_pedido
 (
-    pdo_id    SMALLINT unsigned PRIMARY KEY auto_increment,
-    pdo_valor DECIMAL(10, 2)    NOT NULL,
-    cle_id    SMALLINT unsigned NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=UTF8MB4;
+    pdo_id          SMALLINT unsigned PRIMARY KEY auto_increment,
+    pdo_valor       DECIMAL(10, 2)    NOT NULL,
+    pdo_data_pedido date              NOT NULL,
+    cle_id          SMALLINT unsigned NOT NULL
+) ENGINE = MyISAM
+  DEFAULT CHARSET = UTF8MB4;
 
 ALTER TABLE pdo_pedido ADD CONSTRAINT fk_pdo_cle1 FOREIGN KEY (cle_id) REFERENCES cle_cliente (cle_id);
 

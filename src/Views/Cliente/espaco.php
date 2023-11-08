@@ -27,6 +27,6 @@ use DevFashion\Src\Cliente\Cliente;
 
 
 <?php Functions::renderFooter(); ?>
-<?php Functions::addScript(); ?>
+<?php Functions::addScript(["js/sistema/sistema.js"]); ?>
 </body>
 </html>

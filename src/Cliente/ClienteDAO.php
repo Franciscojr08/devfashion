@@ -103,7 +103,7 @@ class ClienteDAO {
 			$oCliente->getBairro(),
 			$oCliente->getEstado(),
 			$oCliente->getCidade(),
-			$oCliente->getComplemento(),
+			$oCliente->hasComplemento() ? $oCliente->getComplemento() : "",
 			$oCliente->getNumeroEndereco(),
 			$oCliente->getDataNascimento()->format("Y-m-d")
 		];
@@ -141,5 +141,60 @@ class ClienteDAO {
 		}
 
 		return Cliente::createFromArray($aCliente);
+	}
+
+	/**
+	 * Atualiza as informações do cliente
+	 *
+	 * @param Cliente $oCliente
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function update(Cliente $oCliente): void {
+		$sSQL = "UPDATE cle_cliente set
+					cle_nome = ?,
+					cle_cpf = ?,
+					cle_data_nascimento = ?,
+					cle_sexo = ?,
+					cle_email = ?,
+					cle_telefone = ?,
+					cle_senha = ?,
+					cle_cep = ?,
+					cle_logradouro = ?,
+					cle_bairro = ?,
+					cle_estado = ?,
+					cle_cidade = ?,
+					cle_complemento = ?,
+					cle_numero = ?,
+					cle_data_cadastro = ?
+				WHERE
+					cle_id = ?";
+		$aParams = [
+			$oCliente->getNome(),
+			$oCliente->getCPF(),
+			$oCliente->getDataNascimento()->format("Y-m-d"),
+			$oCliente->getSexoIdEnum(),
+			$oCliente->getEmail(),
+			$oCliente->getTelefone(),
+			$oCliente->getSenha(),
+			$oCliente->getCepEndereco(),
+			$oCliente->getLogradouro(),
+			$oCliente->getBairro(),
+			$oCliente->getEstado(),
+			$oCliente->getCidade(),
+			$oCliente->hasComplemento() ? $oCliente->getComplemento() : "",
+			$oCliente->getNumeroEndereco(),
+			$oCliente->getDataNascimento()->format("Y-m-d"),
+			$oCliente->getId()
+		];
+
+		try {
+			Sistema::connection()->execute($sSQL,$aParams);
+		} catch (\PDOException $oExp) {
+			throw new \Exception("Não foi possível cadastrar o cliente");
+		}
 	}
 }

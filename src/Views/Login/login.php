@@ -25,7 +25,7 @@ use DevFashion\Core\Session;
 <?php Functions::renderMenu($aDados); ?>
 
 <main class="main_login_cadastro">
-	<form class="custom-form" action="../login/logar" id="login" type="post">
+	<form class="custom-form" action="../../login/logar" id="login" type="post">
 		<h2 class="mb-4 text-center">Login</h2>
 
 		<?php if (Session::hasMensagem()) { ?>
@@ -50,12 +50,12 @@ use DevFashion\Core\Session;
 
 		<div class="form-group mt-3 text-center d-grid gap-2 mx-auto">
 			<button type="submit" class="btn btn-dark btn-md btn-block">Logar</button>
-			<p class="mt-2 text-center">Não possui uma conta? <br><a href="../login/cadastro">Cadastre-se aqui</a>.</p>
+			<p class="mt-2 text-center">Não possui uma conta? <br><a href="../../login/cadastro">Cadastre-se aqui</a>.</p>
 		</div>
 	</form>
 </main>
 
 <?php Functions::renderFooter(); ?>
-<?php Functions::addScript(); ?>
+<?php Functions::addScript(["js/sistema/sistema.js"]); ?>
 </body>
 </html>

@@ -40,7 +40,7 @@ class loginController {
 
 	public function logar(array $aDados): void {
 		if (empty($aDados['cle_email']) || empty($aDados['cle_senha']) ) {
-			header("location: ../login");
+			header("location: ../../login");
 		}
 
 		try {
@@ -54,10 +54,10 @@ class loginController {
 			}
 
 			Session::setClienteId($oCliente->getId());
-			header("location: ../cliente/espaco");
+			header("location: ../../cliente/espaco");
 		} catch (\Exception $oExp) {
 			Session::setMensagem($oExp->getMessage());
-			header("location: ../login");
+			header("location: ../../login");
 		}
 	}
 
@@ -65,13 +65,13 @@ class loginController {
 	 * Faz o logout do cliente logado
 	 *
 	 * @param array $aDados
-	 * @author Francisco Santos franciscosantos@moobitech.com.br
+	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
 	public function logout(array $aDados): void {
 		Session::destroy();
-		header("location: ../home");
+		header("location: ../../home");
 	}
 }

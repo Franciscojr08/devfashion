@@ -74,6 +74,18 @@ class Carrinho {
 	}
 
 	/**
+	 * Retorna o cliente
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return Cliente
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getCliente(): Cliente {
+		return $this->oCliente;
+	}
+
+	/**
 	 * Adiciona uma roupa ao carrinho
 	 *
 	 * @param Roupa $oRoupa
@@ -87,19 +99,59 @@ class Carrinho {
 		Sistema::getCarrinhoDAO()->adicionarRoupa($this,$oRoupa);
 	}
 
+	/**
+	 * Remove a roupa do carrinho
+	 *
+	 * @param Roupa $oRoupa
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
 	public function removerRoupa(Roupa $oRoupa): void {
-		// TODO: Implementar.
+		Sistema::getCarrinhoDAO()->removerRoupa($this,$oRoupa);
 	}
 
-	public function excluirRoupa(Roupa $oRoupa): void {
-		// TODO: Implementar.
+	/**
+	 * Cadastra o carrinho
+	 *
+	 * @param Cliente $oCliente
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function cadastrar(Cliente $oCliente): void {
+		$this->oCliente = $oCliente;
+		Sistema::getCarrinhoDAO()->save($this);
 	}
 
-	public function cadastrar(): void {
-		// TODO: Implementar.
+	/**
+	 * Retorna a quantidade de roupas no carrinho
+	 *
+	 * @param Roupa $oRoupa
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return bool
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function hasRoupa(Roupa $oRoupa): bool {
+		return Sistema::getCarrinhoDAO()->hasRoupa($this,$oRoupa);
 	}
 
-	public function esvaziarCarrinho(): void {
-		// TODO: Implementar.
+	/**
+	 * Limpa o carrinho após cadastrar o pedido
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function limpar(): void {
+		Sistema::getCarrinhoDAO()->limpar($this);
 	}
 }

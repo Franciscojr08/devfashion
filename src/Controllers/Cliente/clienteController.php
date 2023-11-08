@@ -26,7 +26,7 @@ class clienteController {
 	public function lista(array $aDados): void {
 		try {
 			if (!Session::hasClienteLogado()) {
-				header("location: ../login");
+				header("location: ../../login");
 			}
 
 			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
@@ -52,7 +52,7 @@ class clienteController {
 	public function espaco(array $aDados): void {
 		try {
 			if (!Session::hasClienteLogado()) {
-				header("location: ../login");
+				header("location: ../../login");
 			}
 
 			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
@@ -79,10 +79,12 @@ class clienteController {
 	public function carrinho(array $aDados): void {
 		try {
 			if (!Session::hasClienteLogado()) {
-				header("location: ../login");
+				header("location: ../../login");
 			}
 
-			// TODO: Implementar.
+			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+			$loRoupas = $oCliente->getCarrinho()->getRoupas();
+
 			require_once "Cliente/carrinho.php";
 		} catch (\Exception $oExp) {
 			$oErroController = new errorController();
@@ -189,10 +191,80 @@ class clienteController {
 			$oCliente->cadastrar($aDados);
 			Session::setClienteId($oCliente->getId());
 
-			header("location: ../cliente/espaco");
+			header("location: ../../cliente/espaco");
 		} catch (\Exception $oExp) {
 			Session::setMensagem($oExp->getMessage());
-			header("location: ../login/cadastro");
+			header("location: ../../login/cadastro");
+		}
+	}
+
+	/**
+	 * Atualiza as informações do cliente
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function atualizar(array $aDados): void {
+		try {
+			if (!Session::hasClienteLogado()) {
+				throw new \Exception("É necessário está logado para realizar esta ação.");
+			}
+
+			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+			$oCliente->atualizar($aDados);
+
+			header("location: ../../cliente/espaco");
+		} catch (\Exception $oExp) {
+			Session::setMensagem($oExp->getMessage());
+			header("location: ../../cliente/espaco");
+		}
+	}
+
+	/**
+	 * Atualiza a quantidade de roupas no carrinho
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function atualizarQuantidadeRoupasCarrinho(array $aDados): void {
+		$aRetorno = [];
+
+		try {
+			if (!Session::hasClienteLogado()) {
+				throw new \Exception("É necessário está logado para realizar esta ação.");
+			}
+
+			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+
+			$aRetorno['status'] = true;
+			$aRetorno['quantidade_roupas'] = $oCliente->getQuantidadeRoupasNoCarrinho();
+		} catch (\Exception $oExp) {
+			$aRetorno['status'] = false;
+			$aRetorno['msg'] = $oExp->getMessage();
+		}
+
+		echo json_encode($aRetorno);
+	}
+
+	public function cadastrarPedido(array $aDados): void {
+		try {
+			if (!Session::hasClienteLogado()) {
+				throw new \Exception("É necessário está logado para realizar esta ação.");
+			}
+
+			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
+			$oCliente->cadastrarPedido($aDados);
+
+			header("location: ../../cliente/espaco");
+		} catch (\Exception $oExp) {
+			Session::setMensagem($oExp->getMessage());
+			header("location: ../../cliente/espaco");
 		}
 	}
 }

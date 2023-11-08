@@ -40,4 +40,42 @@ class RoupaList extends \SplObjectStorage {
 	public function isEmpty(): bool {
 		return $this->count() == 0;
 	}
+
+	/**
+	 * Retorna o valor total das roupas
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return string
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getValorTotalRoupas(): string {
+		$fValor = 0.0;
+
+		/** @var Roupa $oRoupa */
+		foreach ($this as $oRoupa) {
+			$fValor += $oRoupa->getPreco();
+		}
+
+		return "R$ " . number_format($fValor,2,",",".");
+	}
+
+	/**
+	 * Retorna o valor total das roupas sem formatacao
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return float
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getValorTotalSemFormatacao(): float	{
+		$fValor = 0.0;
+
+		/** @var Roupa $oRoupa */
+		foreach ($this as $oRoupa) {
+			$fValor += $oRoupa->getPreco();
+		}
+
+		return $fValor;
+	}
 }

@@ -3,7 +3,7 @@
 	<div class="container p-4">
 		<!-- Section: Form -->
 		<section class="">
-			<form action="../home">
+			<form action="../../home">
 				<!--Grid row-->
 				<div class="row d-flex justify-content-center">
 					<!--Grid column-->

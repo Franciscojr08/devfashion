@@ -23,6 +23,6 @@ use DevFashion\Core\Functions;
 
 
 <?php Functions::renderFooter(); ?>
-<?php Functions::addScript(); ?>
+<?php Functions::addScript(["js/sistema/sistema.js"]); ?>
 </body>
 </html>

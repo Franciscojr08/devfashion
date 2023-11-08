@@ -65,7 +65,7 @@ class RoupaDAO {
 		}
 
 		if (empty($aRoupa)) {
-			throw new \Exception("Nenhuma roupa encontrada.");
+			throw new \Exception("Nenhuma roupa encontrada.",404);
 		}
 
 		return Roupa::createFromArray($aRoupa);

@@ -1,8 +1,13 @@
 <?php
 
 use DevFashion\Core\Functions;
+use DevFashion\Src\Roupa\RoupaList;
 
-/** @var array $aDados */
+/**
+ * @var array $aDados
+ * @var string $sModa
+ * @var RoupaList $loRoupas
+ */
 ?>
 
 <!doctype html>
@@ -21,8 +26,19 @@ use DevFashion\Core\Functions;
 <body>
 <?php Functions::renderMenu($aDados); ?>
 
+<div class="lista-desejos">
+	<h4><?php echo $sModa; ?></h4>
+</div>
+
+<section class="destaques">
+	<?php
+	foreach ($loRoupas as $oRoupa) {
+		Functions::imprimirCardRoupa($oRoupa);
+	}
+	?>
+</section>
 
 <?php Functions::renderFooter(); ?>
-<?php Functions::addScript(); ?>
+<?php Functions::addScript(["js/sistema/sistema.js"]); ?>
 </body>
 </html>

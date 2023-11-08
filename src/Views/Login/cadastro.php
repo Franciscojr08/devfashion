@@ -37,7 +37,7 @@ use DevFashion\Core\Session;
 <?php } ?>
 
 <main class="main_login_cadastro">
-	<form class="custom-form" id="cadastro" name="formC" action="../cliente/cadastrar" type="post">
+	<form class="custom-form" id="cadastro" name="formC" action="../../cliente/cadastrar" type="post">
 		<h2 class="mb-4 text-center">Cadastre-se</h2>
 		<div>
 			<h4>Dados Pessoais<em style="color: red">*</em></h4>
@@ -144,12 +144,12 @@ use DevFashion\Core\Session;
 
 			<div class="form-group mt-3 text-center d-grid gap-2 mx-auto">
 				<button type="submit" class="btn btn-dark btn-md btn-block">Cadastrar</button>
-				<p class="text-center mt-2">Já possui uma conta? Faça <a href="../login">login aqui</a>.</p>
+				<p class="text-center mt-2">Já possui uma conta? Faça <a href="../../login">login aqui</a>.</p>
 			</div>
 	</form>
 </main>
 
 <?php Functions::renderFooter(); ?>
-<?php Functions::addScript(["js/Login/script_cadastro.js"]); ?>
+<?php Functions::addScript(["js/sistema/sistema.js","js/Login/script_cadastro.js"]); ?>
 </body>
 </html>

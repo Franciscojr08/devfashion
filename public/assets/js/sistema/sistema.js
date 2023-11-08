@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	changeListaDesejos();
+	adicionarRoupaNoCarrinho();
 });
 
 function changeListaDesejos() {
@@ -19,9 +20,15 @@ function changeListaDesejos() {
 	});
 }
 
+function adicionarRoupaNoCarrinho() {
+	$(".btn_add_roupa").click(function() {
+		adicionarRoupa($(this).data("id"));
+	});
+}
+
 function adicionarRoupaNaListaDeDesejos(iIdRoupa,eElementHearth,eElementRoupa) {
 	$.ajax({
-		url: "../cliente/adicionarRoupaNaListaDesejo",
+		url: "../../cliente/adicionarRoupaNaListaDesejo",
 		type: "POST",
 		data: {iRpaId:iIdRoupa},
 		dataType: "JSON",
@@ -43,7 +50,7 @@ function adicionarRoupaNaListaDeDesejos(iIdRoupa,eElementHearth,eElementRoupa) {
 
 function removerRoupadaListaDeDesejos(iIdRoupa,eElementHearth,eElementRoupa) {
 	$.ajax({
-		url: "../cliente/removerRoupaDaListaDesejo",
+		url: "../../cliente/removerRoupaDaListaDesejo",
 		type: "POST",
 		data: {iRpaId:iIdRoupa},
 		dataType: "JSON",
@@ -86,7 +93,7 @@ function carregarToast(sType, sTitulo, sMensagem) {
 		type: sType,
 		title: `<b>${sTitulo}</b>`,
 		content: `<b>${sMensagem}</b>`,
-		delay: 4000
+		delay: 3000
 	});
 }
 
@@ -120,4 +127,39 @@ function getContentEmptyList() {
 	sContent += "</div>";
 
 	return sContent;
+}
+
+function adicionarRoupa(iIdRoupa) {
+	$.ajax({
+		url: "../../shop/adicionarRoupaCarrinho",
+		type: "POST",
+		data: {iRpaId:iIdRoupa},
+		dataType: "JSON",
+		success: function (json) {
+			if (json.status) {
+				carregarToast("success","Sucesso",json.msg);
+				atualizarQuantidadeRoupasNoCarrinho();
+			} else {
+				let sMensagem = "<b>Desculpe, ocorreu um erro!</b>";
+				if (json.msg) {
+					sMensagem = `<b>${json.msg}</b>`;
+				}
+
+				carregarToast("warning","Atenção",sMensagem);
+			}
+		}
+	});
+}
+
+function atualizarQuantidadeRoupasNoCarrinho() {
+	$.ajax({
+		url: "../../cliente/atualizarQuantidadeRoupasCarrinho",
+		type: "POST",
+		dataType: "JSON",
+		success: function (json) {
+			if (json.status) {
+				$("#contador_itens_carrinho").text(json.quantidade_roupas);
+			}
+		}
+	});
 }

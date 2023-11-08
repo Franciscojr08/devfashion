@@ -32,11 +32,11 @@ use DevFashion\Core\Functions;
 		<p class="lead">
 			<?php echo $sMensagem; ?>
 		</p>
-		<a href="../home" class="btn btn-secondary">Home</a>
+		<a href="../../home" class="btn btn-secondary">Home</a>
 	</div>
 </div>
 
 <?php Functions::renderFooter(); ?>
-<?php Functions::addScript(); ?>
+<?php Functions::addScript(["js/sistema/sistema.js"]); ?>
 </body>
 </html>
