@@ -128,3 +128,12 @@ function validarForm(){
         return false
     }
 }
+function atualizarDados(){
+    if (validarSenha()){
+        document.getElementById("formulario").submit()
+        return true
+    }else{
+        alert("ALTERE SUA SENHA")
+        return false
+    }
+}

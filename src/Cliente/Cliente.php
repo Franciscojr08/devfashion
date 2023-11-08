@@ -524,8 +524,23 @@ class Cliente {
 		Sistema::getClienteDAO()->save($this);
 	}
 
-	public function atualizar(): void {
-		// TODO: Implementar.
+	public function atualizar(array $aDados): void {
+		$this->sNome = $aDados['cle_nome'];
+		$this->sCPF = $aDados['cle_cpf'];
+		$this->oDataNascimento = new \DateTimeImmutable($aDados['cle_data_nascimento']);
+		$this->iSexo = $aDados['cle_sexo'];
+		$this->sEmail = $aDados['cle_email'];
+		$this->sTelefone = $aDados['cle_telefone'];
+		$this->setSenha($aDados['cle_senha']);
+		$this->sCEP = $aDados['cle_cep'];
+		$this->sLogradouro = $aDados['cle_logradouro'];
+		$this->sBairro = $aDados['cle_bairro'];
+		$this->sEstado = $aDados['cle_estado'];
+		$this->sCidade = $aDados['cle_cidade'];
+		$this->iNumero = $aDados['cle_numero'];
+		$this->sComplemento = $aDados['cle_complemento'];
+
+		Sistema::getClienteDAO()->update($this);
 	}
 
 	public function excluirCadastro(): void {

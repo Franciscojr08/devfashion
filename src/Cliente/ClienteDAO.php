@@ -115,7 +115,50 @@ class ClienteDAO {
 			throw new \Exception("Não foi possível cadastrar o cliente");
 		}
 	}
+	public function update(Cliente $oCliente): void {
+		$oConnection = Sistema::connection();
+		$sSQL ="UPDATE cle_cliente
+			SET cle_nome = ?,
+		    SET cle_data_nascimento = ?, 
+		    SET cle_sexo = ?, 
+		    SET cle_telefone = ?, 
+		    SET cle_senha = ?,
+		    SET cle_cpf = ?,
+		    SET cle_email = ?,
+		    SET cle_cep = ?,
+			SET cle_logradouro = ?,
+			SET cle_bairro = ?,
+			SET cle_estado = ?,
+			SET cle_cidade = ?,
+			SET cle_complemento = ?,
+			SET cle_numero = ?
+		    WHERE ID = ?";
 
+		$aParams = [
+			$oCliente->getNome(),
+			$oCliente->getDataNascimento()->format("Y-m-d"),
+			$oCliente->getSexoIdEnum(),
+			$oCliente->getTelefone(),
+			$oCliente->getSenha(),
+			$oCliente->getCPF(),
+			$oCliente->getEmail(),
+			$oCliente->getCepEndereco(),
+			$oCliente->getLogradouro(),
+			$oCliente->getBairro(),
+			$oCliente->getEstado(),
+			$oCliente->getCidade(),
+			$oCliente->getComplemento(),
+			$oCliente->getNumeroEndereco(),
+			$oCliente->getId(),
+		];
+
+		try {
+			$oConnection->execute($sSQL,$aParams);
+			$oCliente->setId($oConnection->getLasInsertId());
+		} catch (\PDOException $oExp) {
+			throw new \Exception("Não foi possível cadastrar o cliente");
+		}
+	}
 	/**
 	 * Consulta o cliente pelo e-mail
 	 *

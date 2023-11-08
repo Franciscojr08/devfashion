@@ -97,9 +97,18 @@ class clienteController {
 		require_once "Cliente/compra.php";
 	}
 
-	public function atualizarCliente(): void {
-		// TODO: Implementar.
+	public function atualizarCliente(array $aDados): void {
+		try {
+			$oCliente = new Cliente();
+			$oCliente->atualizar($aDados);
+
+			header("location: ../cliente/espaco");
+		} catch (\Exception $oExp) {
+			Session::setMensagem($oExp->getMessage());
+
+		}
 	}
+
 
 	public function excluirCliente(): void {
 		// TODO: Implementar.

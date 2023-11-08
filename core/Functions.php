@@ -2,6 +2,7 @@
 
 namespace DevFashion\Core;
 
+use DevFashion\Src\Pedido\Pedido;
 use DevFashion\Src\Roupa\Roupa;
 
 /**
@@ -162,6 +163,23 @@ class Functions {
 				<button>Adicionar ao Carrinho</button>
 				<input type='hidden' id='lista_desejo_{$oRoupa->getId()}' value='$iPadrao'>
 			</div>
+		";
+	}
+	public static function imprimirCardPedido(Pedido $oPedido): void{
+
+		$lListaRoupas = $oPedido->getListaRoupas();
+		$oRoupa = $lListaRoupas[0];
+
+		echo "
+			<div class='d-flex'>
+			 	<div class='align-self-start'>
+			 	<p>{$oPedido->getId()} data: {$oPedido->getData()}</p>
+			 	<img src='../public/assets/img/{$oRoupa->getCaminhoImagem()}.jpg?$sTimeStamp'>
+				</div>
+				<div class=''>
+				
+				</div>
+			 </div>
 		";
 	}
 }
