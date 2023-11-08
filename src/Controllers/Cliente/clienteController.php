@@ -93,19 +93,6 @@ class clienteController {
 		}
 	}
 
-	public function comprar(array $aDados): void {
-		// TODO: Implementar.
-		require_once "Cliente/compra.php";
-	}
-
-	public function atualizarCliente(): void {
-		// TODO: Implementar.
-	}
-
-	public function excluirCliente(): void {
-		// TODO: Implementar.
-	}
-
 	/**
 	 * Adiciona uma roupa na lista de desejos
 	 *
@@ -216,6 +203,7 @@ class clienteController {
 			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
 			$oCliente->atualizar($aDados);
 
+			Session::setMensagem("Cliente atualizado com sucesso!");
 			header("location: ../../cliente/espaco");
 		} catch (\Exception $oExp) {
 			Session::setMensagem($oExp->getMessage());
@@ -252,6 +240,15 @@ class clienteController {
 		echo json_encode($aRetorno);
 	}
 
+	/**
+	 * Cadastra o pedido
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
 	public function cadastrarPedido(array $aDados): void {
 		try {
 			if (!Session::hasClienteLogado()) {
@@ -261,6 +258,7 @@ class clienteController {
 			$oCliente = Sistema::getClienteDAO()->find(Session::getClienteId());
 			$oCliente->cadastrarPedido($aDados);
 
+			Session::setMensagem("Pedido efetuado com sucesso!");
 			header("location: ../../cliente/espaco");
 		} catch (\Exception $oExp) {
 			Session::setMensagem($oExp->getMessage());

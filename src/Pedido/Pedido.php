@@ -75,6 +75,18 @@ class Pedido {
 	public function getValorPedido(): float {
 		return $this->fValorPedido;
 	}
+	
+	/**
+	 * Retorna a descrição do valor do pedido
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return string
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getDescricaoValor(): string {
+		return "R$ " . number_format($this->fValorPedido,2,",",".");
+	}
 
 	/**
 	 * Atribui o valor
@@ -193,5 +205,18 @@ class Pedido {
 		if (empty($this->oCliente) || empty($this->fValorPedido) || $this->loRoupas->isEmpty()) {
 			throw new \Exception("Não é possível fazer um pedido sem roupas ou com o valor zerado.");
 		}
+	}
+
+	/**
+	 * Retorna a quantidade de roupas no pedido
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return int
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getQuantidadeRoupas(): int {
+		return Sistema::getPedidoDAO()->getQuantidadeRoupas($this) ?? 0;
 	}
 }

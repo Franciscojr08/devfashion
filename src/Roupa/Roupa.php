@@ -240,7 +240,7 @@ class Roupa {
 
 		$oCarrinho->adicionarRoupa($this);
 	}
-	
+
 	/**
 	 * Retorna a descrição do parcelamento padrão
 	 *

@@ -474,3 +474,11 @@ section.shop h3 {
 .valor-total {
     margin-bottom: 5%;
 }
+
+.content-pedido-roupas {
+    text-align: center;
+}
+
+.content-pedido-roupas img {
+    width: 15%;
+}

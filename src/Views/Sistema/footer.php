@@ -1,6 +1,6 @@
 <footer class="bg-dark text-center text-white">
 	<!-- Grid container -->
-	<div class="container p-4">
+	<div class="container p-4 pb-1">
 		<!-- Section: Form -->
 		<section class="">
 			<form action="../../home">
@@ -51,31 +51,19 @@
 		<section class="">
 			<!--Grid row-->
 			<div class="row">
-				<!--Grid column-->
-
-				<!--Grid column-->
-				<div class="col-lg-0 col-md-0 mb-0 mb-md-2">
+				<div class="">
 					<h5 class="text-uppercase">Links</h5>
+                    <p>
+                        <a href="#!" class="text-white me-3">Fale Conosco</a>
+                        <a href="#!" class="text-white me-3">Trabalhe Conosco</a>
+                        <a href="#!" class="text-white me-3">Sobre</a>
+                        <a href="#!" class="text-white me-3">Ajuda</a>
+                    </p>
 
-					<ul class="list-unstyled mb-0">
-						<li>
-							<a href="#!" class="text-white">Fale Conosco</a>
-						</li>
-						<li>
-							<a href="#!" class="text-white">Trabalhe Conosco</a>
-						</li>
-						<li>
-							<a href="#!" class="text-white">Sobre</a>
-						</li>
-						<li>
-							<a href="#!" class="text-white">Ajuda</a>
-						</li>
-					</ul>
-					<!--Grid column-->
 				</div>
-				<!--Grid row-->
+
 		</section>
-		<!-- Section: Links -->
+
 	</div>
 	<!-- Grid container -->
 

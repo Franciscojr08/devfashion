@@ -38,6 +38,15 @@ class loginController {
 		require_once "Login/cadastro.php";
 	}
 
+	/**
+	 * Realiza o login
+	 *
+	 * @param array $aDados
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return void
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
 	public function logar(array $aDados): void {
 		if (empty($aDados['cle_email']) || empty($aDados['cle_senha']) ) {
 			header("location: ../../login");

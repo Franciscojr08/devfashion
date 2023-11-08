@@ -3,6 +3,7 @@
 namespace DevFashion\Src\Pedido;
 
 use DevFashion\Src\Cliente\Cliente;
+use DevFashion\Src\Roupa\RoupaList;
 use DevFashion\Src\Sistema\Sistema;
 
 /**
@@ -11,7 +12,7 @@ use DevFashion\Src\Sistema\Sistema;
  * @version 1.0.0
  */
 class PedidoDAO {
-	
+
 	/**
 	 * Cadastra um pedido
 	 *
@@ -47,6 +48,55 @@ class PedidoDAO {
 			} catch (\PDOException $oExp) {
 				throw new \Exception("Não foi possível cadastrar o pedido.");
 			}
+		}
+	}
+
+	/**
+	 * Consulta os pedidos com base no cliente
+	 *
+	 * @param Cliente $oCliente
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return PedidoList
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function findByCliente(Cliente $oCliente): PedidoList {
+		$sSQL = "SELECT * FROM pdo_pedido where cle_id = ?";
+		$aParam[] = $oCliente->getId();
+
+		try {
+			$aaPedidos = Sistema::connection()->getArray($sSQL,$aParam);
+		} catch (\PDOException $oExp) {
+			throw new \Exception("Não foi possível consultar os pedidos.");
+		}
+
+		if (empty($aaPedidos)) {
+			return new PedidoList();
+		}
+
+		return PedidoList::createFromArray($aaPedidos);
+	}
+
+	/**
+	 * Retorna a quantidade de roupas no pedido
+	 *
+	 * @param Pedido $oPedido
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return int
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
+	public function getQuantidadeRoupas(Pedido $oPedido): int {
+		$sSQl = "select count(pdo_id) from rpo_roupa_pedido where pdo_id = ?";
+		$aParam[] = $oPedido->getId();
+
+		try {
+			$aRetorno = Sistema::connection()->getRow($sSQl,$aParam);
+			return intval($aRetorno[0]);
+		} catch (\PDOException $oExp) {
+			throw new \Exception("Não foi possível consultar o pedido.");
 		}
 	}
 }

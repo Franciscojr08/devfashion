@@ -30,7 +30,7 @@ class Cliente {
 	private string $sEstado;
 	private string $sCidade;
 	private string $sComplemento;
-	private int $iNumero;
+	private int $sNumero;
 	private \DateTimeImmutable $oDataCadastro;
 	private string $sSenha;
 	private ListaDesejos $oListaDesejos;
@@ -478,20 +478,20 @@ class Cliente {
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
 	public function getNumeroEndereco(): int {
-		return $this->iNumero;
+		return $this->sNumero;
 	}
 
 	/**
 	 * Atribui o número do endereço
 	 *
-	 * @param int $iNumero
+	 * @param int $sNumero
 	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
-	public function setNumeroEndereco(int $iNumero): void {
-		$this->iNumero = $iNumero;
+	public function setNumeroEndereco(int $sNumero): void {
+		$this->sNumero = $sNumero;
 	}
 
 	/**
@@ -528,7 +528,9 @@ class Cliente {
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
 	public function atualizar(array $aDados): void {
-		if ($this->hasCPFCadastrado($aDados)) {
+		$sCPF = str_replace(".","",str_replace("-","",$aDados['cle_cpf']));
+
+		if ($this->hasCPFCadastrado($aDados) && $sCPF != $this->sCPF) {
 			$sMensagem = "O CPF informado já possui cadastro.";
 			throw new \Exception($sMensagem);
 		}
@@ -598,8 +600,17 @@ class Cliente {
 		return $oListaDesejos->getRoupas();
 	}
 
+	/**
+	 * Retorna os pedidos do cliente
+	 *
+	 * @author Francisco Santos franciscojuniordh@gmail.com
+	 * @return PedidoList
+	 * @throws \Exception
+	 *
+	 * @since 1.0.0 - Definição do versionamento da classe
+	 */
 	public function getPedidos(): PedidoList {
-		return new PedidoList();
+		return Sistema::getPedidoDAO()->findByCliente($this);
 	}
 
 	/**
@@ -640,7 +651,7 @@ class Cliente {
 		$this->sBairro = $aDados['cle_bairro'];
 		$this->sEstado = $aDados['cle_estado'];
 		$this->sCidade = $aDados['cle_cidade'];
-		$this->iNumero = $aDados['cle_numero'];
+		$this->sNumero = $aDados['cle_numero'];
 		$this->sComplemento = $aDados['cle_complemento'] ?? "";
 	}
 
