@@ -145,13 +145,95 @@ use DevFashion\Src\Pedido\PedidoList;
                 <div class="tab-pane fade" id="meusPedidos">
                     <!-- Lista de Pedidos -->
                     <h2>Meus Pedidos</h2>
+                    <div class="card mb-3" style="max-width: 540px; ">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="/public/assets/img/roupas/feminino/fem_02.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7"><h5 class="card-title">NB1564890</h5></div>
+                                        <div class="col"> <small> Data: 06-11-2023</small></div>
+                                    </div>
+                                    <div class="col"> <small>Descrição do(s) Produto(s):</small></div>
+                                    <div class="row">
+                                        <div class="col-10">Cropped Preto Manga Longa</div>
+                                        <div class="col"> x1</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-9">Entrega:</div>
+                                        <div class="col" style="color: green;"> <small>Grátis</small></div>
+                                        <div class="col-9">Valor Total:</div>
+                                        <div class="col"> <small> R$59,90</small></div>
 
-                    <!-- Inclua aqui a lista de pedidos do usuário -->
+                                    </div>
+                                    <p class="card-text"><small class="text-body-secondary"></small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="/public/assets/img/roupas/feminino/fem_01.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7"><h5 class="card-title">NB1564890</h5></div>
+                                        <div class="col"> <small> Data: 06-11-2023</small></div>
+                                    </div>
+                                    <div class=""> <small>Descrição do(s) Produto(s):</small></div>
+                                    <div class="row">
+                                        <div class="col-10">Calça Wide Cintura Alta</div>
+                                        <div class="col"> x1</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-9">Entrega:</div>
+                                        <div class="col" style="color: green;"> <small>Grátis</small></div>
+                                        <div class="col-9">Valor Total:</div>
+                                        <div class="col"> <small>R$89,90</small></div>
+                                    </div>
+                                    <p class="card-text"><small class="text-body-secondary"></small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="/public/assets/img/roupas/feminino/fem_03.jpg" class="img-fluid rounded-start" alt="..." >
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7"><h5 class="card-title">NB1564890</h5></div>
+                                        <div class="col"> <small> Data: 07-11-2023</small></div>
+                                    </div>
+                                    <div class=""> <small>Descrição do(s) Produto(s):</small></div>
+                                    <div class="row">
+                                        <div class="col-10">Blusa Duna Branca Lisa</div>
+                                        <div class="col"> x1</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-9">Entrega:</div>
+                                        <div class="col" style="color: green;"> <small>Grátis</small></div>
+                                        <div class="col-9">Valor Total:</div>
+                                        <div class="col"> <small> R$59,90</small></div>
+
+                                        <p class="card-text"><small class="text-body-secondary"></small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     document.getElementById('sexo').value = "<?php echo $oCliente->getSexoIdEnum(); ?>"
 
