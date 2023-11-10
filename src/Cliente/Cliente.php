@@ -30,7 +30,7 @@ class Cliente {
 	private string $sEstado;
 	private string $sCidade;
 	private string $sComplemento;
-	private int $sNumero;
+	private string $sNumero;
 	private \DateTimeImmutable $oDataCadastro;
 	private string $sSenha;
 	private ListaDesejos $oListaDesejos;
@@ -473,24 +473,24 @@ class Cliente {
 	 * Retorna o número do endereço
 	 *
 	 * @author Francisco Santos franciscojuniordh@gmail.com
-	 * @return int
+	 * @return string
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
-	public function getNumeroEndereco(): int {
+	public function getNumeroEndereco(): string {
 		return $this->sNumero;
 	}
 
 	/**
 	 * Atribui o número do endereço
 	 *
-	 * @param int $sNumero
+	 * @param string $sNumero
 	 * @author Francisco Santos franciscojuniordh@gmail.com
 	 * @return void
 	 *
 	 * @since 1.0.0 - Definição do versionamento da classe
 	 */
-	public function setNumeroEndereco(int $sNumero): void {
+	public function setNumeroEndereco(string $sNumero): void {
 		$this->sNumero = $sNumero;
 	}
 

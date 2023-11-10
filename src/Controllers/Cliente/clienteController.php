@@ -178,6 +178,7 @@ class clienteController {
 			$oCliente->cadastrar($aDados);
 			Session::setClienteId($oCliente->getId());
 
+			Session::setMensagem("Cliente cadastrado com sucesso!");
 			header("location: ../../cliente/espaco");
 		} catch (\Exception $oExp) {
 			Session::setMensagem($oExp->getMessage());

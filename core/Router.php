@@ -49,6 +49,15 @@ class Router {
 		} catch (\Exception $oExp) {
 			$oErroController->errorExeption($this->aDados, $oExp->getMessage(), $oExp->getCode());
 			exit();
+		} catch (\Throwable $oExp) {
+			$sMensagem = 'Desculpe, ocorreu um erro inesperado.';
+
+			if ($oExp instanceof \TypeError) {
+				$sMensagem = 'Ops! Houve um problema com o tipo de dado fornecido. Verifique os campos.';
+			}
+
+			$oErroController->errorExeption($this->aDados, $sMensagem, $oExp->getCode());
+			exit();
 		}
 	}
 
