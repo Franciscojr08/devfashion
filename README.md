@@ -31,3 +31,10 @@ DevFashion é uma aplicação web focada em moda, criada como parte de um trabal
 1. Clone o repositório:  
    ```bash
    git clone https://github.com/Franciscojr08/devfashion.git
+   cd devfashion
+2. Construa e inicie os containers:
+   ```bash
+   docker compose up -d
+3. Acesse em:
+   ```bash
+   http://localhost
